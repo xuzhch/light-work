@@ -69,7 +69,7 @@ public class UserController {
 	public String toIndex4(HttpServletRequest request,Model model){
 		int userId = Integer.parseInt(request.getParameter("id"));
 		User user = this.userService.getUserById(userId);
-		model.addAttribute("user", user);
+		model.addAttribute("user1", user);
 		return "showUser";
 	}
 }

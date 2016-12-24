@@ -1,0 +1,60 @@
+<div ng-page>
+<div class="page-header" id="pageHeader">
+    <h1>
+        编辑用户组
+        <small>
+            <i class="fa fa-angle-double-right"></i>
+            编辑用户组信息
+        </small>
+    </h1>
+</div><!-- /.page-header -->
+
+<div class="row">
+    <div class="col-xs-12">
+        <!-- PAGE CONTENT BEGINS -->
+        <form id="editUsergroupForm" class="form-horizontal" role="form">
+            <input type="hidden" name="_id" id="_id"/>
+
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="name"> 名称： </label>
+                <div class="col-sm-9">
+                    <input type="text" class="col-xs-10 col-sm-6" name="name" id="name" datatype="s" />
+                </div>
+            </div>
+
+            <div class="space-4"></div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="code"> 编码： </label>
+                <div class="col-sm-9">
+                    <input type="text" readonly="true" placeHolder="以role_为前缀(role_name)" class="col-xs-10 col-sm-6" name="code" id="code" />
+                </div>
+            </div>
+
+            <div class="space-4"></div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="desc" > 描述： </label>
+                <div class="col-sm-9">
+                    <textarea type="text" class="col-xs-10 col-sm-6" name="desc" id="desc" rows="5" datatype="s"/>
+                </div>
+            </div>
+
+            <div class="clearfix form-actions">
+                <div class="col-md-offset-3 col-md-9">
+                    <button id="btn_sub" class="btn btn-info btn_sub" type="submit">
+                        <i class="icon-ok bigger-110"></i>
+                        保存
+                    </button>
+
+                    &nbsp; &nbsp; &nbsp;
+                    <button class="btn" type="reset">
+                        <i class="icon-undo bigger-110"></i>
+                        重置
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+</div>

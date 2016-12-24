@@ -1,0 +1,14 @@
+.width100 {
+	width: "100%"!important
+}
+
+#pageslide {
+	width: 600px!important
+}
+.float_left {
+	float: left;
+}
+
+.center {
+	text-align: center;
+}

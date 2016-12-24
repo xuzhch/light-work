@@ -1,0 +1,19 @@
+[
+	
+	{"name":"智慧云平台","app":"smartcloudServer","hash":"","pic":"","desc":"智慧云平台","children":[
+        {"name":"用户与权限管理","hash":"org","pic":"icon-desktop","desc":"用户与权限管理","children":[
+            {"name":"用户列表","hash":"user.list","desc":"用户列表"},
+            {"name":"角色列表","hash":"role.list","desc":"角色列表"},
+            {"name":"部门列表","hash":"dept.list","desc":"部门列表"},
+            {"name":"用户组列表","hash":"usergroup.list","desc":"用户组列表"}
+
+        ]},
+        {"name":"菜单管理","hash":"menu","pic":"icon-desktop","desc":"菜单管理","children":[
+            {"name":"菜单列表","hash":"menu.list","desc":"菜单列表"}
+        ]},
+        {"name":"认证中心","hash":"certificate","pic":"icon-desktop","desc":"认证中心","children":[
+            {"name":"注册列表","hash":"certificate.list","desc":"注册列表"}
+        ]}
+    ]}
+	
+]

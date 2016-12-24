@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='smartEducationCloud'>
+	<head>
+		<meta charset="utf-8" />
+		<title>宝信智能水务平台</title>
+		<meta name="keywords" content="Bootstrap中文" />
+		<meta name="description" content="Bootstrap中文翻译等相关Bootstrap插件下载" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		    <!-- basic styles -->
+	    <link rel="stylesheet" href="public/css/import/bootstrap.min.css"  />
+	    <link rel="stylesheet" href="public/css/import/font-awesome.min.css" />
+	    <link rel="stylesheet" href="public/css/import/ace.min.css" />
+	    <link rel="stylesheet" href="public/css/import/ace-rtl.min.css" />
+        <link rel="stylesheet" href="public/css/import/jquery.pageslide.css" />
+        <link rel="stylesheet" href="public/css/import/jquery.validform.css" />
+        <link rel="stylesheet" href="public/css/import/font-awesome.ext.css">
+        <link rel="stylesheet" href="public/css/import/zTreeStyle.css" />
+        <link rel="stylesheet" href="public/css/common/style.css" />
+        <link rel="stylesheet" href="public/css/smartcloud/style.css" />
+	</head>
+
+	<body>
+		<div class="navbar navbar-default" id="navbar">
+			<script type="text/javascript">
+				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="navbar-container" id="navbar-container">
+				<div class="navbar-header pull-left">
+					<a href="javascript:void(0);" class="navbar-brand">
+						<small>
+							<i class="fa fa-leaf"></i>	
+							<strong>宝信智能水务平台</strong> 
+						</small>						
+					</a><!-- /.brand -->
+				</div><!-- /.navbar-header -->
+
+				<div class="navbar-header pull-right" role="navigation">
+					<ul class="nav ace-nav">
+						<li class="grey">
+							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+								<i class="fa fa-tasks"></i>
+								<span class="badge badge-grey" id="taskTitleCount"></span>
+							</a>
+
+							<ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+								<li id="taskLi" class="dropdown-header">
+									<i class="fa fa-ok"></i>
+									还有<span id="taskCount"></span>个任务完成
+								</li>
+								<li>
+									<a href="javascript:void(0);">
+										查看任务详情
+										<i class="fa fa-arrow-right"></i>
+									</a>
+								</li>
+							</ul>
+						</li>
+
+						<li class="grey">
+							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+								<i class="fa fa-comment"></i>
+								<span class="badge badge-important" id="noticeTitleCount">0</span>
+							</a>
+
+							<ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+								<li class="dropdown-header" id="noticeLi">
+                                    共<span id="noticeCount">0</span>条通知
+								</li>
+								<li>
+									<a href="javascript:void(0);">
+										查看所有通知
+										<i class="fa fa-arrow-right"></i>
+									</a>
+								</li>
+							</ul>
+						</li>
+
+						<li class="grey">
+							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+								<i class="fa fa-envelope fa fa-animated-vertical"></i>
+								<span class="badge badge-success">5</span>
+							</a>
+
+							<ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+								<li class="dropdown-header">
+									<i class="fa fa-envelope-alt"></i>
+									5条消息
+								</li>
+
+								<li>
+									<a href="javascript:void(0);">
+										<img src="public/images/smartcloud/test/avatar.png" class="msg-photo" alt="Alex's Avatar" />
+										<span class="msg-body">
+											<span class="msg-title">
+												<span class="blue">Alex:</span>
+												不知道写啥 ...
+											</span>
+
+											<span class="msg-time">
+												<i class="fa fa-time"></i>
+												<span>1分钟以前</span>
+											</span>
+										</span>
+									</a>
+								</li>
+
+								<li>
+									<a href="javascript:void(0);">
+										<img src="public/images/smartcloud/test/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
+										<span class="msg-body">
+											<span class="msg-title">
+												<span class="blue">Susan:</span>
+												不知道翻译...
+											</span>
+
+											<span class="msg-time">
+												<i class="fa fa-time"></i>
+												<span>20分钟以前</span>
+											</span>
+										</span>
+									</a>
+								</li>
+
+								<li>
+									<a href="javascript:void(0);">
+										<img src="public/images/smartcloud/test/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
+										<span class="msg-body">
+											<span class="msg-title">
+												<span class="blue">Bob:</span>
+												到底是不是英文 ...
+											</span>
+
+											<span class="msg-time">
+												<i class="fa fa-time"></i>
+												<span>下午3:15</span>
+											</span>
+										</span>
+									</a>
+								</li>
+
+								<li>
+									<a href="javascript:void(0);">
+										查看所有消息
+										<i class="fa fa-arrow-right"></i>
+									</a>
+								</li>
+							</ul>
+						</li>
+
+						<li class="grey">
+							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+								<img class="nav-user-photo" src="public/images/smartcloud/test/avatar4.png" alt="Jason's Photo" />
+								<span class="user-info">
+									<small>欢迎光临,</small>
+									<%=name%>
+								</span>
+
+								<i class="fa fa-caret-down"></i>
+							</a>
+
+							<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+								<li>
+									<a href="javascript:void(0);">
+										<i class="fa fa-cog"></i>
+										设置
+									</a>
+								</li>
+
+								<li>
+									<a href="javascript:void(0);">
+										<i class="fa fa-user"></i>
+										个人资料
+									</a>
+								</li>
+
+								<li class="divider"></li>
+
+								<li>
+									<a href="/logout">
+										<i class="fa fa-off"></i>
+										退出
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul><!-- /.ace-nav -->
+				</div><!-- /.navbar-header -->
+			</div><!-- /.container -->
+		</div>
+
+		<div class="main-container" id="main-container">
+			<div class="main-container-inner">
+				<a class="menu-toggler" id="menu-toggler" href="#">
+					<span class="menu-text"></span>
+				</a>
+
+				<div class="sidebar" id="sidebar">
+					
+					<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+						<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+							<button class="btn btn-success">
+								<i class="icon-signal"></i>
+							</button>
+
+							<button class="btn btn-info">
+								<i class="icon-pencil"></i>
+							</button>
+
+							<button class="btn btn-warning">
+								<i class="icon-group"></i>
+							</button>
+
+							<button class="btn btn-danger">
+								<i class="icon-cogs"></i>
+							</button>
+						</div>
+
+						<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+							<span class="btn btn-success"></span>
+							<span class="btn btn-info"></span>
+							<span class="btn btn-warning"></span>
+							<span class="btn btn-danger"></span>
+						</div>
+					</div><!-- #sidebar-shortcuts -->
+
+					<ul class="nav nav-list" id="menus">
+						
+					</ul><!-- /.nav-list -->
+
+					
+				</div>
+
+				<div class="main-content">
+					<div class="breadcrumbs" id="breadcrumbs">
+						<ul class="breadcrumb">
+							<li>
+								<i class="fa fa-home home-icon"></i>
+								<a href="#">首页</a>
+							</li>
+							<li class="active">控制台</li>
+						</ul><!-- .breadcrumb -->
+
+						<div class="nav-search" id="nav-search">
+							<form class="form-search">
+								<span class="input-icon">
+									<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+									<i class="fa fa-search nav-search-icon"></i>
+								</span>
+							</form>
+						</div><!-- #nav-search -->
+					</div>
+
+					<div class="page-content" id="page">
+                        <div ng-view></div>
+					</div><!-- /.page-content -->
+				</div><!-- /.main-content -->
+
+				
+			</div><!-- /.main-container-inner -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="fa fa-angle-double-up fa fa-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+		<!-- <script src="/javascripts/import/jquery-1.8.3.js"></script>
+		<script src="/javascripts/import/jquery.validate.min.js"></script>
+		<script src="/javascripts/import/bootstrap.min.js"></script>
+		<script src="/javascripts/import/ace.min.js"></script> -->
+ 		<script data-main="public/javascripts/smartcloud/main.js" src="public/javascripts/import/require.min.js"></script>
+		<!-- inline scripts related to this page -->
+</body>
+</html>
+

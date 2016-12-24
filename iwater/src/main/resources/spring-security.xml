@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<http use-expressions="false" auto-config="false"
+		entry-point-ref="myAuthenticationEntryPoint">
+
+		<!-- 资源访问权限请在lightWorkSecurityMetadataSource中设置 -->
+		<intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+
+		<!-- 获取资源无权限处理 -->
+		<access-denied-handler ref="accessDeniedHandler" />
+
+		<!-- 自定义的filter，实现用户验证和资源权限验证 -->
+		<custom-filter ref="lightWorkAuthenticationFilter"
+			position="FORM_LOGIN_FILTER" />
+		<custom-filter ref="lightWorkSecurityInterceptor"
+			before="FILTER_SECURITY_INTERCEPTOR" />
+	</http>
+
+
+	<!-- 未登录访问受限资源跳转的登录url -->
+	<beans:bean id="myAuthenticationEntryPoint"
+		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+		<beans:constructor-arg name="loginFormUrl"
+			value="/login.html" />
+	</beans:bean>
+
+	<beans:bean id="accessDeniedHandler"
+		class="org.springframework.security.web.access.AccessDeniedHandlerImpl">
+		<beans:property name="errorPage" value="/accessDenied.html" />
+	</beans:bean>
+
+	<!-- 登录验证过滤器 init-method="init"指定初始化方法为init() -->
+	<beans:bean id="lightWorkAuthenticationFilter" init-method="init"
+		class="com.baosight.iwater.core.security.LightWorkAuthenticationFilter">
+		<beans:property name="authenticationManager" ref="lightWorkAuthenticationManager" />
+		<beans:property name="successUrl" value="/index.html" /> <!-- 登录成功后跳转的页面 -->
+		<beans:property name="errorUrl" value="/login.html" /> <!-- 登录验证失败后跳转的页面 -->
+		<beans:property name="filterProcessesUrl" value="/login" /> <!-- 在登录页面中指定登录验证url，过滤器在匹配该url时进行验证登录 -->
+	</beans:bean>
+
+	<!-- 实现了UserDetailsService的Bean 用户拥有的权限：登录后取得用户所保有的权限信息 //认证管理器 -->
+	<authentication-manager alias="lightWorkAuthenticationManager">
+		<authentication-provider user-service-ref="lightWorkUserDetailServiceImpl">
+			<!-- 密码加密 -->
+			<password-encoder ref="lightWorkPasswordEncoder" />
+		</authentication-provider>
+	</authentication-manager>
+
+	<!-- 密码加密 -->
+	<beans:bean id="lightWorkPasswordEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+		<beans:constructor-arg name="strength" value="11" />
+	</beans:bean>
+
+	<!-- 自定义资源权限验证拦截器 -->
+	<beans:bean id="lightWorkSecurityInterceptor"
+		class="com.baosight.iwater.core.security.LightWorkSecurityInterceptor">
+		<beans:property name="authenticationManager" ref="lightWorkAuthenticationManager" />
+		<beans:property name="accessDecisionManager" ref="lightWorkAccessDecisionManager" />
+		<beans:property name="securityMetadataSource" ref="lightWorkSecurityMetadataSource" />		
+	</beans:bean>
+	
+	<!-- 获取访问url对应的所有权限 -->
+	<beans:bean id="lightWorkSecurityMetadataSource"
+		class="com.baosight.iwater.core.security.LightWorkSecurityMetadataSource" >
+		<beans:property name="urlResource">
+			<beans:map>
+				<!-- 无需验证可访问的url -->
+				<beans:entry key="/public/**" value="IS_AUTHENTICATED_ANONYMOUSLY" />
+				<beans:entry key="/images/**" value="IS_AUTHENTICATED_ANONYMOUSLY" />
+				<beans:entry key="/css/**" value="IS_AUTHENTICATED_ANONYMOUSLY" />
+				<beans:entry key="/login.html" value="IS_AUTHENTICATED_ANONYMOUSLY" />
+				<beans:entry key="/accessDenied.html" value="IS_AUTHENTICATED_ANONYMOUSLY" />				
+				<beans:entry key="/logout" value="IS_AUTHENTICATED_ANONYMOUSLY" />
+				
+				<!-- url的访问权限, 有多个权限的用“,”隔开，如ROLE_USER,ROLE_ADMIN-->
+				<beans:entry key="/index.html" value="ROLE_USER" />
+			</beans:map>
+		</beans:property>
+	</beans:bean>
+	
+	<!-- 校验用户的权限是否足够 -->
+	<beans:bean id="lightWorkAccessDecisionManager"
+		class="com.baosight.iwater.core.security.LightWorkAccessDecisionManager" />
+
+</beans:beans>

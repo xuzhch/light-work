@@ -1,0 +1,67 @@
+<div ng-page>
+<div class="page-header" id="page-header">
+    <h1>
+        授权
+        <small>
+            <i class="fa fa-angle-double-right"></i>
+            授权资源信息
+        </small>
+    </h1>
+</div><!-- /.page-header -->
+
+<div class="row">
+    <div class="col-xs-12">
+    
+        <div class="tabbable">
+            <ul class="nav nav-tabs" id="resource">
+                <li>
+                    <a data-toggle="tab" href="#menu">
+                        菜单
+                    </a>
+                </li>
+
+                <li>
+                    <a data-toggle="tab" href="#component">
+                        组件
+                    </a>
+                </li>
+
+                <li class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#url">
+                        服务
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="menu" class="tab-pane in active">
+                    <div class="zTreeDemoBackground left">
+                        <ul id="menuTree" class="ztree"></ul>
+                    </div>
+                </div>
+
+                <div id="component" class="tab-pane">
+                    <div class="zTreeDemoBackground left">
+                        <ul id="componentTree" class="ztree"></ul>
+                    </div>
+                </div>
+
+                <div id="url" class="tab-pane">
+                    <div class="zTreeDemoBackground left">
+                        <ul id="urlTree" class="ztree"></ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>    
+        <div class="clearfix form-actions">
+            <div class="center">
+                <button id="auth" class="btn btn-info" type="button" ng-click="auth">
+                    <i class="icon-ok bigger-110"></i>
+                    授权确认
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

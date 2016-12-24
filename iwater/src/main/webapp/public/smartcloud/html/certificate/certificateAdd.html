@@ -1,0 +1,53 @@
+<div ng-page>
+<div class="page-header" id="pageHeader">
+    <h1>
+        注册
+        <small>
+            <i class="fa fa-angle-double-right"></i>
+            第三方应用
+        </small>
+    </h1>
+</div>
+
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <!-- PAGE CONTENT BEGINS -->
+        <form id="addCertificateForm" class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="name"> 名称： </label>
+                <div class="col-sm-9">
+                    <input type="text" name="name" id="name" 
+                          class="col-xs-10 col-sm-6" datatype="s" />
+                </div>
+            </div>
+            
+            <div class="space-4"></div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="desc" > 描述： </label>
+
+                <div class="col-sm-9">
+                    <textarea rows="5" class="col-xs-10 col-sm-6" type="text" name="desc" id="desc" datatype="s"/>
+                </div>
+            </div>
+
+            <div class="clearfix form-actions">
+                <div class="col-md-offset-3 col-md-9">
+                    <button id="submit-form" class="btn btn-info" type="submit">
+                        <i class="icon-ok bigger-110"></i>
+                        保存
+                    </button>
+
+                    &nbsp; &nbsp; &nbsp;
+                    <button id="reset-form" class="btn" type="reset">
+                        <i class="icon-undo bigger-110"></i>
+                        重置
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+</div>

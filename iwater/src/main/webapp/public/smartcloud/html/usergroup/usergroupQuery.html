@@ -1,0 +1,53 @@
+<div id="queryDiv" ng-page>
+    <div class="page-header" id="query-header">
+        <h1>
+            查询条件
+            <small>
+                <i class="fa fa-angle-double-right"></i>
+                输入查询条件进行查询
+            </small>
+        </h1>
+    </div><!-- /.page-header -->
+
+    <div class="row">
+        <div class="col-xs-12">
+            <form  id="queryUsergroupForm" class="form-horizontal"  role="form">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="name"> 名称： </label>
+                    <div class="col-sm-9">
+                        <input type="text" name="name" id="name"
+                               class="col-xs-10 col-sm-6"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="code"> 编码： </label>
+                    <div class="col-sm-9">
+                        <input type="text" name="code" id="code"
+                               class="col-xs-10 col-sm-6"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="createUsername"> 创建者： </label>
+                    <div class="col-sm-9">
+                        <input type="text" name="createUsername" id="createUsername"
+                               class="col-xs-10 col-sm-6"/>
+                    </div>
+                </div>
+                <div class="clearfix form-actions">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button class="btn btn-info" type="submit">
+                            <i class="icon-ok bigger-110"></i>
+                            确定
+                        </button>
+
+                        &nbsp; &nbsp; &nbsp;
+                        <button class="btn" type="reset">
+                            <i class="icon-undo bigger-110"></i>
+                            重置
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

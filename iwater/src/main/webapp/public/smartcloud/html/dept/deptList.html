@@ -1,0 +1,38 @@
+<div ng-page>
+<div class="page-header" id="page-header">
+    <h1>
+        部门树
+        <small>
+            <i class="fa fa-angle-double-right"></i>
+            部门信息树
+        </small>
+    </h1>
+</div><!-- /.page-header -->
+
+<div class="row">
+    <div class="col-xs-12">
+        <p>
+            <button class="btn btn-primary second" ng-click="addDept" id="addDept" >
+                <i class="fa fa-plus"></i>
+                新增
+            </button>
+            <button class="btn btn-primary second" ng-click="deleteDept" id="deleteDept">
+                <i class="fa fa-trash-o"></i>
+                删除
+            </button>
+            <button class="btn btn-primary" ng-click="authorize" id="authorize" >
+                <i class="fa fa-cog"></i>
+                授权
+            </button>
+            <button class="btn btn-primary second"  ng-click="userManage" id="userManage">
+                <i class="fa fa-plus"></i>
+                用户管理
+            </button>
+        </p> 
+        <div class="zTreeDemoBackground left">
+            <ul id="deptTree" class="ztree"></ul>
+        </div>
+ 
+    </div>
+</div>
+</div>

@@ -1,0 +1,33 @@
+{
+    "JSON":{
+        "birthAddress":[
+            {
+                "key":"sh",
+                "value":"上海"
+            },
+            {
+                "key":"js",
+                "value":"江苏"
+            },
+            {
+                "key":"zj",
+                "value":"浙江"
+            }
+        ]
+
+    },
+    "Method":{
+        "geoName":{
+            "url":"/analyseServer/analyse/basic/getChinaGeoInfo"
+        },
+        "appApply":{
+            "url":"/paasServer/paas/apps/list",
+            "params":{
+                "app_type":0
+            }
+        },
+        "apiApply":{
+            "url":"/paasServer/paas/api/getServerList"
+        }
+    }
+}

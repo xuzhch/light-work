@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>智慧水平台登录页面</title>
+    <meta name="keywords" content="智慧云平台" />
+    <meta name="description" content="智慧云平台" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- basic styles -->
+    <link rel="stylesheet" href="public/css/import/bootstrap.min.css"  />
+    <link rel="stylesheet" href="public/css/import/font-awesome.min.css" />
+    <link rel="stylesheet" href="public/css/import/ace.min.css" />
+    <link rel="stylesheet" href="public/css/import/ace-rtl.min.css" />
+
+</head>
+
+<body class="login-layout">
+    <div class="col-xs-1"></div>
+    <div class="col-xs-5">
+        <div  class="space-32"></div>
+        <div  class="space-32"></div>
+        <div  class="space-32"></div>
+        <h1>
+            <!-- <i class="icon-leaf white"></i> -->
+            <span class="white">Smart Cloud Platform</span><br><br>
+            <span class="white">智慧云管理平台</span>
+        </h1>
+        <h4 class="white">&copy; 上海宝信软件股份有限公司</h4>
+    </div>
+    <div class="col-xs-3">
+        <div  class="space-32"></div>
+        <div  class="space-32"></div>
+        <div  class="space-32"></div>
+        <div id="login-box" class="login-box visible widget-box no-border">
+            <div class="widget-body">
+                <div class="widget-main">
+                    <h4 class="header blue lighter bigger">
+                        <i class="icon-coffee blue"></i>
+                        请输入登录信息
+                    </h4>
+
+                    <div class="space-6"></div>
+
+                    <form  method="get" action="login">
+                        <fieldset>
+                            <label class="block clearfix"> 用户名：
+    							<span class="block input-icon input-icon-right">
+    								<input type="text" class="form-control" placeholder="Username" id="username" name="username"/>
+    								<i class="icon-user"></i>
+    							</span>
+                            </label>
+
+                            <label class="block clearfix"> 密码：
+    							<span class="block input-icon input-icon-right">
+    								<input type="password" class="form-control" placeholder="Password"  id="password" name="password"/>
+    								<i class="icon-lock"></i>
+    							</span>
+                            </label>
+
+                            <span class="red">&nbsp;</span>
+
+                            <div class="clearfix">
+                                <label class="inline">
+                                    <input type="checkbox" class="ace" />
+                                    <span class="lbl"> 记住我</span>
+                                </label>
+
+                                <button type="submit" class="width-35 pull-right btn btn-primary">
+                                    登录
+                                </button>
+                            </div>
+
+                            <div class="space-4"></div>
+                        </fieldset>
+                    </form>
+
+                </div><!-- /widget-main -->
+
+                <div class="toolbar clearfix">
+                    <div>
+                        <a href="#" onclick="show_box('forgot-box'); return false;" class="forgot-password-link">
+                            <i class="icon-arrow-left"></i>
+                            忘记密码
+                        </a>
+                    </div>
+
+                    <div>
+                        <a href="#" onclick="show_box('signup-box'); return false;" class="user-signup-link">
+                            注册用户
+                            <i class="icon-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div><!-- /widget-body -->
+        </div><!-- /login-box -->
+
+        <div id="forgot-box" class="forgot-box widget-box no-border">
+            <div class="widget-body">
+                <div class="widget-main">
+                    <h4 class="header red lighter bigger">
+                        <i class="icon-key"></i>
+                        找回密码
+                    </h4>
+
+                    <div class="space-6"></div>
+                    <p>
+                        输入您的注册邮箱，以重新设置密码！
+                    </p>
+
+                    <form>
+                        <fieldset>
+                            <label class="block clearfix">
+    							<span class="block input-icon input-icon-right">
+    								<input type="email" class="form-control" placeholder="Email" />
+    								<i class="icon-envelope"></i>
+    							</span>
+                            </label>
+
+                            <div class="clearfix">
+                                <button type="button" class="width-35 pull-right btn btn-sm btn-danger">
+                                    <i class="icon-lightbulb"></i>
+                                    发送!
+                                </button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div><!-- /widget-main -->
+
+                <div class="toolbar center">
+                    <a href="#" onclick="show_box('login-box'); return false;" class="back-to-login-link">
+                        返回登录
+                        <i class="icon-arrow-right"></i>
+                    </a>
+                </div>
+            </div><!-- /widget-body -->
+        </div><!-- /forgot-box -->
+
+        <div id="signup-box" class="signup-box widget-box no-border">
+            <div class="widget-body">
+                <div class="widget-main">
+                    <h4 class="header green lighter bigger">
+                        <i class="icon-group blue"></i>
+                        新用户注册
+                    </h4>
+
+                    <div class="space-6"></div>
+                    <p> 请输入您的信息: </p>
+
+                    <form action="/reg" method="post" id="regForm">
+                        <fieldset>
+                            <label class="block clearfix">
+    							<span class="block input-icon input-icon-right">
+    								<input type="email" class="form-control required email" placeholder="Email" name="email" />
+    								<i class="icon-envelope"></i>
+    							</span>
+                            </label>
+
+                            <label class="block clearfix">
+    							<span class="block input-icon input-icon-right">
+    								<input type="text" class="form-control required isUsername"   placeholder="Username" name="username"   />
+    								<i class="icon-user"></i>
+    							</span>
+                            </label>
+
+                            <label class="block clearfix">
+    							<span class="block input-icon input-icon-right">
+    								<input type="password" class="form-control required" placeholder="Password" name="password" id="password" />
+    								<i class="icon-lock"></i>
+    							</span>
+                            </label>
+
+                            <label class="block clearfix">
+    							<span class="block input-icon input-icon-right">
+    								<input type="password" class="form-control required" equalTo="#regForm input[name='password']" placeholder="Repeat password" name="password-repeat"/>
+    								<i class="icon-retweet"></i>
+    							</span>
+                            </label>
+
+                            <label class="block">
+                                <input type="checkbox" class="ace" />
+    								<span class="lbl">
+    									我接受
+    									<a href="#">用户使用协议</a>
+    								</span>
+                            </label>
+
+                            <div class="space-24"></div>
+
+                            <div class="clearfix">
+                                <button type="reset" class="width-30 pull-left btn btn-sm">
+                                    <i class="icon-refresh"></i>
+                                    重设
+                                </button>
+
+                                <button type="submit" class="width-65 pull-right btn btn-sm btn-success" id="signUpSubmit" disabled="disabled">
+                                    注册
+                                    <i class="icon-arrow-right icon-on-right"></i>
+                                </button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+
+                <div class="toolbar center">
+                    <a href="#" onclick="show_box('login-box'); return false;" class="back-to-login-link">
+                        <i class="icon-arrow-left"></i>
+                        返回登录
+                    </a>
+                </div>
+            </div><!-- /widget-body -->
+        </div><!-- /signup-box -->
+    </div><!-- /position-relative -->
+
+<!-- basic scripts -->
+
+<script src="public/javascripts/import/jquery-1.8.3.js"></script>
+<script src="public/javascripts/import/jquery.validate.min.js"></script>
+
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+    function show_box(id) {
+        jQuery('.widget-box.visible').removeClass('visible');
+        jQuery('#'+id).addClass('visible');
+    }
+
+    jQuery.validator.addMethod("isUsername", function(value, element) {
+        var zip = /^[a-zA-Z][a-zA-Z0-9]{2,15}$/;
+        return this.optional(element) || (zip.test(value));
+    }, "格式：字母+数字（可选），长度3-16位");
+
+    $(function(){
+        if($(".ace").is(":checked")){
+            $("#signUpSubmit").removeAttr("disabled");
+        }else{
+            $("#signUpSubmit").attr({"disabled":"disabled"});
+        }
+    })
+    $(function(){
+        $(".ace").click(function(){
+               if($(this).is(":checked")){
+                   $("#signUpSubmit").removeAttr("disabled");
+               }else{
+                   $("#signUpSubmit").attr({"disabled":"disabled"});
+               }
+        })
+    })
+
+    $(function(){
+        $("#regForm").validate();
+    })
+</script>
+</body>
+</html>

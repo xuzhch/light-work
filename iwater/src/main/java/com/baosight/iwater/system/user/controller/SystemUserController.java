@@ -15,8 +15,8 @@ import com.baosight.iwater.pojo.User;
 import com.baosight.iwater.service.IUserService;
 
 @Controller
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/sysuser")
+public class SystemUserController {
 	@Resource
 	private IUserService userService;
 	

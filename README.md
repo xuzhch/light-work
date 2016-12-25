@@ -1,7 +1,7 @@
 # LightWork Web框架
 作者：xuzhengchao  联系方式：QQ群591747485
 
-轻量级JEE Web框架，基于Spring4+SpringMVC4+MyBatis3实现，采用了前后端分离的设计思想，前端和服务端实现了松耦合，通过RESTful服务接口交互数据。
+轻量级JEE Web框架，基于Spring4+SpringMVC4+MyBatis3实现，运用了前后端分离的设计思想，前端和服务端实现了松耦合，通过RESTful服务接口交互数据。
 
 一、框架特点
 

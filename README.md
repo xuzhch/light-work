@@ -35,4 +35,4 @@
 
 4、创建Maven web项目，Maven会自动构建，按照pom.xml中的配置下载依赖的jar包。
 
-5、在Eclipse中配置好运行Server，如TOMCAT8，将项目添加到server中即可发布运行。
+5、在Eclipse中配置好运行Server，如Tomcat8，将项目添加到server中即可发布运行。

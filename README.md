@@ -19,7 +19,7 @@ LightWork是一款轻量级JavaEE Web框架，基于Spring4+SpringMVC4+MyBatis3�
 
 7、服务端集成了Spring Security组件，实现了用户验证和访问控制功能，可自定义用户验证方式和资源访问控制。
 
-8、服务端支持RESTful服务接口便捷开发。
+8、服务端支持RESTful服务接口便捷开发，支持json模式校验。
 
 9、服务端集成Thymeleaf模板，替代jsp页面。
 

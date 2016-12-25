@@ -183,9 +183,9 @@
 
 		<!-- JSON模式校验 -->
 		<dependency>
-			<groupId>com.github.fge</groupId>
-			<artifactId>json-schema-validator</artifactId>
-			<version>2.2.6</version>
+			<groupId>org.everit.json</groupId>
+			<artifactId>org.everit.json.schema</artifactId>
+			<version>1.4.1</version>
 		</dependency>
 
 		<!-- 实现Restful Web Service，支持返回xml或json数据 -->

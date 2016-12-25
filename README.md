@@ -25,14 +25,14 @@
 
 二、下载与使用
 
-1、参与本开源框架开发，请使用git工具下载项目进行开发。
+1、学习研究或基于本框架开发项目，可以直接下载zip文件。
 
-2、基于本框架开发其他项目，请下载zip文件作为项目基础。
+2、参与本开源框架开发，贡献代码，请使用git工具下载项目进行开发。
 
 3、推荐使用Eclipse neon2进行开发，已内置Maven、git等插件，
 
 下载地址：http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/neon2
 
-4、创建Maven web项目，Maven会自动构建，按照pom.xml中的配置下载依赖的jar包。
+4、创建Maven web项目，Maven会自动构建按照pom.xml中的配置下载依赖的jar包。
 
 5、在Eclipse中配置好运行Server，如Tomcat8，将项目添加到server中即可发布运行。

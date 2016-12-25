@@ -13,7 +13,7 @@
 
 4、前端借鉴了AngularJS的设计思路，实现了简单MVC模式，逻辑清晰，代码简洁。
 
-5、服务端基于Spring4+SpringMVC4+MyBatis3实现，能够支持多种平台（Web浏览器、移动应用、桌面应用等）的前端。
+5、服务端基于Spring4+SpringMVC4+MyBatis3实现，能够支持多种方式（Web浏览器、移动应用、桌面应用等）的前端。
 
 6、服务端集成了Spring Security组件，实现了用户验证和访问控制功能。
 

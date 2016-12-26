@@ -4,7 +4,8 @@
 	"jsPathBase":"/javascripts",
 	"code":"component_smartcloudServer",
 	"pCode":"component_root",
-	"index":"user.list",
+	"indexPage":"user.list",
+	"childmodules":["/modules/system.json","/modules/admin.json","/modules/normal.json"],
 	"modules":[
 		{"module":"user","caption":"用户管理","desc":"用户管理","js":"/system/userController.js","pages":[
 			{"id":"list","caption":"用户列表","desc":"用户列表","url":"/system/user/userList.html","method":"init","components":[

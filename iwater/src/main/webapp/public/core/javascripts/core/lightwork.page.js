@@ -26,7 +26,7 @@ define(["util","pageslide"],function (util) {
         //    util.get("system/access/getAuthorize",{"type":"menu"},function(data){
                 //if(flag||util.contains(data,"menu_"+pathName+hashStr)){
                     $.getJSON(url,function(config){
-                        hashStr = hashStr||config.index;//hashStr为空，则使用首页设置
+                        hashStr = hashStr||config.indexPage;//hashStr为空，则使用首页设置
                         var hashPathArr = hashStr.split(".");
                         var retObj = {"htmlPathBase":config.htmlPathBase,"jsPathBase":config.jsPathBase,"code":config.code,"hashStr":hashStr};
                         var flag = true ;

@@ -2,7 +2,7 @@
 * 封装公共前端组件
 */
 
-define(["import/bootbox.min","datatables","datatables.bootstrap","jquery.validform"],function (bootbox) {
+define(["bootbox","datatables","datatables.bootstrap","jquery.validform"],function (bootbox) {
 	/**  
 	* @description 重写alert
 	* @param message 弹出消息
@@ -283,7 +283,7 @@ define(["import/bootbox.min","datatables","datatables.bootstrap","jquery.validfo
 	* @param callback 回调函数
 	*/
     var getMenus = function(app,flag,callback){
-        $.getJSON("public/config/menu.json", function(config){
+        $.getJSON(APP_CONTEXT.appMenuPath, function(config){
         	var menus = [];
             for(var i=0,len=config.length;i<len;i++){
             	if(!app){//全部获取
@@ -339,7 +339,7 @@ define(["import/bootbox.min","datatables","datatables.bootstrap","jquery.validfo
 	* @param callback 回调函数
 	*/
     var getComponent = function(params,callback){
-    	$.getJSON("public/config/component.json",function(component){
+    	$.getJSON(APP_CONTEXT.appComponentPath,function(component){
     		var paths = component.path;
     		var ret = [];
     		//组装组件信息

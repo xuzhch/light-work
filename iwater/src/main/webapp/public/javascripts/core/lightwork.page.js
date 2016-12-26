@@ -26,9 +26,9 @@ define(["util","pageslide"],function (util) {
         //    util.get("system/access/getAuthorize",{"type":"menu"},function(data){
                 //if(flag||util.contains(data,"menu_"+pathName+hashStr)){
                     $.getJSON(url,function(config){
-                        hashStr = hashStr||config.index;
+                        hashStr = hashStr||config.index;//hashStr为空，则使用首页设置
                         var hashPathArr = hashStr.split(".");
-                        var retObj = {"appPath":config.htmlPath,"appjsPath":config.appjsPath,"code":config.code,"hashStr":hashStr};
+                        var retObj = {"htmlPathBase":config.htmlPathBase,"jsPathBase":config.jsPathBase,"code":config.code,"hashStr":hashStr};
                         var flag = true ;
                         //组装配置文件中的配置信息
                         for(var i=0,len=config.modules.length;i<len;i++){
@@ -72,7 +72,7 @@ define(["util","pageslide"],function (util) {
 	        }
 	    });
 		//加载对应的JS
-        require([config.appjsPath+config.jsPath],function(objCtrl){
+        require([APP_CONTEXT.appPath+config.jsPathBase+config.jsPath],function(objCtrl){
             
             if(config.initMethod){
                 objCtrl[config.initMethod]();//页面初始化方法
@@ -108,7 +108,7 @@ define(["util","pageslide"],function (util) {
                 var id = $(this).attr("id");
                 var optionCodeArr = optionCode.split(".");
                 $("#"+id).empty();
-                $.getJSON("public/config/select.json",function(select){
+                $.getJSON(APP_CONTEXT.appSelectPath,function(select){
                     if(optionCodeArr[0]=="JSON"){
                         var optionJSON = select.JSON[optionCodeArr[1]];
                         //动态生成option
@@ -131,11 +131,12 @@ define(["util","pageslide"],function (util) {
     * @param url 获取配置信息地址
     * @param pos jquery 定位符 动态页面显示的位置
     */ 
-	var parsePage = function(hashStr,url,pos){
+	var parsePage = function(hashStr,pos){
+		var url = APP_CONTEXT.appConfigPath;
 		getConfig(hashStr,url,function(config){
 			//加载页面
             pos = pos||"#page";
-            $(pos).load(config.appPath+config.htmlPath,function() {
+            $(pos).load(APP_CONTEXT.appPath+config.htmlPathBase+config.htmlPath,function() {
             	//对加载的页面进行处理
                 pageController(config);
             });
@@ -149,10 +150,11 @@ define(["util","pageslide"],function (util) {
     * @param url 配置信息路径
     * @param callback 回调函数
     */ 
-    var slidePage = function(hashStr,url,callback){
+    var slidePage = function(hashStr,callback){
+    	var url = APP_CONTEXT.appConfigPath;
     	getConfig(hashStr,url,function(config){
 			//加载页面
-            $.pageslide({href:config.appPath+config.htmlPath,direction:"left"},function() {
+            $.pageslide({href:APP_CONTEXT.appPath+config.htmlPathBase+config.htmlPath,direction:"left"},function() {
             	//对加载的页面进行处理
                 pageController(config);
             });

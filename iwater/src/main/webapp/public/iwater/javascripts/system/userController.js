@@ -1,7 +1,7 @@
 /**
 * 用户信息操作
 */
-define(["page","util","smartcloud/resourceController","ztree"],function (page,util,resource) {
+define(["page","util",APP_CONTEXT.appJsPath+"/system/resourceController","ztree"],function (page,util,resource) {
 
 	var url = "public/smartcloud/config/app.json";
 	/**  
@@ -37,7 +37,7 @@ define(["page","util","smartcloud/resourceController","ztree"],function (page,ut
     * @description 新增用户页面显示
     */
 	var addUser = function(){
-		page.slidePage("user.add",url);
+		page.slidePage("user.add");
 	};
 	/**  
     * @description 新增用户操作
@@ -58,7 +58,7 @@ define(["page","util","smartcloud/resourceController","ztree"],function (page,ut
     * @description 查询用户页面显示
     */
 	var queryUser = function(){
-		page.slidePage("user.query",url);
+		page.slidePage("user.query");
 	};
 	/**  
     * @description 查询用户操作
@@ -78,7 +78,7 @@ define(["page","util","smartcloud/resourceController","ztree"],function (page,ut
 	var  editUser = function(){
 		var username = util.getTableRadioVal("#users-table");
 		if(username){
-			page.slidePage("user.edit",url);
+			page.slidePage("user.edit");
 		}else{
 			util.alert("请选择需要编辑的用户！");
 		}

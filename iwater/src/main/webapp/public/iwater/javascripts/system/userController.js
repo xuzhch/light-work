@@ -3,7 +3,6 @@
 */
 define(["page","util","app/system/resourceController","ztree"],function (page,util,resource) {
 
-	var url = "public/smartcloud/config/app.json";
 	/**  
     * @description 页面初始化 列表显示
     * @param params 查询条件

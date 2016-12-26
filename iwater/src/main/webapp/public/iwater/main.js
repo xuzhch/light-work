@@ -3,7 +3,7 @@
 * 加载引用的文件
 */
 requirejs.config({
-    baseUrl: 'public',
+    baseUrl: 'public',  //注意不要随便修改
     paths: {
         "jquery":'core/javascripts/import/jquery-1.8.3',
         "jquery.validform":'core/javascripts/import/jquery.validform',

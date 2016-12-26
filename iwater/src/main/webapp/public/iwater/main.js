@@ -5,7 +5,8 @@
 requirejs.config({
     baseUrl: 'public',  //注意不要随便修改
     paths: {
-        "jquery":'core/javascripts/import/jquery-1.8.3',
+    	app: 'iwater/javascripts',
+    	"jquery":'core/javascripts/import/jquery-1.8.3',
         "jquery.validform":'core/javascripts/import/jquery.validform',
         "bootstrap":'core/javascripts/import/bootstrap.min',
         "hashchange":'core/javascripts/import/jquery.ba-hashchange',
@@ -16,7 +17,7 @@ requirejs.config({
         "datatables":'core/javascripts/import/jquery.dataTables.min',
         "datatables.bootstrap":'core/javascripts/import/jquery.dataTables.bootstrap',
         "ztree":'core/javascripts/import/jquery.ztree.all-3.5.min',
-        "bootbox":'core/javascripts/import/bootbox.min'
+        "bootbox":'core/javascripts/import/bootbox.min'         
     },
     shim: {
         'hashchange': { 
@@ -64,7 +65,7 @@ function ApplicationContext(){
 var APP_CONTEXT = new ApplicationContext();
 
 // Start the main app logic.
-requirejs(['jquery','page',APP_CONTEXT.appJsPath+'/system/indexController','hashchange','bootstrap','ace'],function   ($,page,index) {
+requirejs(['jquery','page','app/system/indexController','hashchange','bootstrap','ace'],function   ($,page,index) {
 	
 	
 

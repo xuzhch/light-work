@@ -1,7 +1,7 @@
 /**
 * 用户信息操作
 */
-define(["page","util",APP_CONTEXT.appJsPath+"/system/resourceController","ztree"],function (page,util,resource) {
+define(["page","util","app/system/resourceController","ztree"],function (page,util,resource) {
 
 	var url = "public/smartcloud/config/app.json";
 	/**  

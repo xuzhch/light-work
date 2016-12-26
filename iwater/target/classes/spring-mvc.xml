@@ -20,6 +20,7 @@
 	<mvc:resources mapping="/login.html" location="/public/login.html" />
 	<mvc:resources mapping="/index.html" location="/public/index.html" />
 	<mvc:resources mapping="/accessDenied.html" location="/public/accessDenied.html" />
+	<mvc:resources mapping="/*" location="/public/index.html" />
 
 
 	<!--集成Thymeleaf模板引擎，文档参见 http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html 

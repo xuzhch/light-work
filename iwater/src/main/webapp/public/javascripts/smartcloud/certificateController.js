@@ -2,7 +2,7 @@
 * 第三方认证中心操作
 */
 define(["page","util"],function (page,util) {
-	var url = "smartcloud/config/app.json";
+	var url = "public/smartcloud/config/app.json";
 	/**  
     * @description 获取认证用户
     */

@@ -1,6 +1,7 @@
 {
 	"name":"智慧云平台",
-	"path":"smartcloud",
+	"htmlPath":"public/smartcloud",
+	"appjsPath":"public",
 	"code":"component_smartcloudServer",
 	"pCode":"component_root",
 	"index":"user.list",

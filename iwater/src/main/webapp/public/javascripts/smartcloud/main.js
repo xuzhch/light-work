@@ -54,7 +54,7 @@ requirejs(['jquery','page','smartcloud/indexController','hashchange','bootstrap'
     $(window).hashchange( function(){
         var hashStr = "";//页面定位
         hashStr = location.hash.replace("#","");
-        page.parsePage(hashStr,"smartcloud/config/app.json");
+        page.parsePage(hashStr,"public/smartcloud/config/app.json");
     
     });
     $(window).hashchange();//触发事件

@@ -303,12 +303,12 @@ define(["import/bootbox.min","datatables","datatables.bootstrap","jquery.validfo
             	}
             }
             //判断是否是管理员
-            get("/smartcloudServer/basic/user/isAdmin",{},function(flag){
+            get("system/access/isAdmin",{},function(flag){
             	if(flag){//管理员无需判断权限
             		return callback(menus);
             	}else{
             		//获取菜单权限
-            		get("/smartcloudServer/cache/redis/getAuthorize",{"type":"menu"},function(data){
+            		get("system/access/getAuthorize",{"type":"menu"},function(data){
             			var ret = [];
             			for(var i=0,len=menus.length;i<len;i++){
             				if(contains(data,menus[i].code)){
@@ -339,7 +339,7 @@ define(["import/bootbox.min","datatables","datatables.bootstrap","jquery.validfo
 	* @param callback 回调函数
 	*/
     var getComponent = function(params,callback){
-    	$.getJSON("/config/component.json",function(component){
+    	$.getJSON("public/config/component.json",function(component){
     		var paths = component.path;
     		var ret = [];
     		//组装组件信息
@@ -394,12 +394,15 @@ define(["import/bootbox.min","datatables","datatables.bootstrap","jquery.validfo
 	* @return boolean
 	*/
 	var contains = function (arr, obj) {
-	    var i = arr.length;
-	    while (i--) {
-	        if (arr[i] === obj) {
-	            return true;
-	        }
-	    }
+		if(arr){
+			var i = arr.length;
+		    while (i--) {
+		        if (arr[i] === obj) {
+		            return true;
+		        }
+		    }
+		}
+	    
 	    return false;
 	}
 	 /**  

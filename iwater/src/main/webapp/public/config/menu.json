@@ -1,18 +1,18 @@
 [
 	
-	{"name":"ÖÇ»ÛÔÆÆ½Ì¨","app":"smartcloudServer","hash":"","pic":"","desc":"ÖÇ»ÛÔÆÆ½Ì¨","children":[
-        {"name":"ÓÃ»§ÓëÈ¨ÏŞ¹ÜÀí","hash":"org","pic":"icon-desktop","desc":"ÓÃ»§ÓëÈ¨ÏŞ¹ÜÀí","children":[
-            {"name":"ÓÃ»§ÁĞ±í","hash":"user.list","desc":"ÓÃ»§ÁĞ±í"},
-            {"name":"½ÇÉ«ÁĞ±í","hash":"role.list","desc":"½ÇÉ«ÁĞ±í"},
-            {"name":"²¿ÃÅÁĞ±í","hash":"dept.list","desc":"²¿ÃÅÁĞ±í"},
-            {"name":"ÓÃ»§×éÁĞ±í","hash":"usergroup.list","desc":"ÓÃ»§×éÁĞ±í"}
+	{"name":"æ™ºæ…§äº‘å¹³å°","app":"smartcloudServer","hash":"","pic":"","desc":"æ™ºæ…§äº‘å¹³å°","children":[
+        {"name":"ç”¨æˆ·ä¸æƒé™ç®¡ç†","hash":"org","pic":"icon-desktop","desc":"ç”¨æˆ·ä¸æƒé™ç®¡ç†","children":[
+            {"name":"ç”¨æˆ·åˆ—è¡¨","hash":"user.list","desc":"ç”¨æˆ·åˆ—è¡¨"},
+            {"name":"è§’è‰²åˆ—è¡¨","hash":"role.list","desc":"è§’è‰²åˆ—è¡¨"},
+            {"name":"éƒ¨é—¨åˆ—è¡¨","hash":"dept.list","desc":"éƒ¨é—¨åˆ—è¡¨"},
+            {"name":"ç”¨æˆ·ç»„åˆ—è¡¨","hash":"usergroup.list","desc":"ç”¨æˆ·ç»„åˆ—è¡¨"}
 
         ]},
-        {"name":"²Ëµ¥¹ÜÀí","hash":"menu","pic":"icon-desktop","desc":"²Ëµ¥¹ÜÀí","children":[
-            {"name":"²Ëµ¥ÁĞ±í","hash":"menu.list","desc":"²Ëµ¥ÁĞ±í"}
+        {"name":"èœå•ç®¡ç†","hash":"menu","pic":"icon-desktop","desc":"èœå•ç®¡ç†","children":[
+            {"name":"èœå•åˆ—è¡¨","hash":"menu.list","desc":"èœå•åˆ—è¡¨"}
         ]},
-        {"name":"ÈÏÖ¤ÖĞĞÄ","hash":"certificate","pic":"icon-desktop","desc":"ÈÏÖ¤ÖĞĞÄ","children":[
-            {"name":"×¢²áÁĞ±í","hash":"certificate.list","desc":"×¢²áÁĞ±í"}
+        {"name":"è®¤è¯ä¸­å¿ƒ","hash":"certificate","pic":"icon-desktop","desc":"è®¤è¯ä¸­å¿ƒ","children":[
+            {"name":"æ³¨å†Œåˆ—è¡¨","hash":"certificate.list","desc":"æ³¨å†Œåˆ—è¡¨"}
         ]}
     ]}
 	

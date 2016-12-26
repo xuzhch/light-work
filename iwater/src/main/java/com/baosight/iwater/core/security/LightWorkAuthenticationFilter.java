@@ -28,11 +28,11 @@ public class LightWorkAuthenticationFilter extends AbstractAuthenticationProcess
 	/**
 	 * 登录成功后跳转的地址
 	 */
-	private String successUrl = "/public/index.html";
+	private String successUrl = "/index.html";
 	/**
 	 * 登录失败后跳转的地址
 	 */
-	private String errorUrl = "/login";
+	private String errorUrl = "/login.html";
 	/**
 	 * 过滤器拦截的登录验证地址
 	 */

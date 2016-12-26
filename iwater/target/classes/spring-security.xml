@@ -81,6 +81,7 @@
 				
 				<!-- url的访问权限, 有多个权限的用“,”隔开，如ROLE_USER,ROLE_ADMIN-->
 				<beans:entry key="/index.html" value="ROLE_USER" />
+				<beans:entry key="/" value="ROLE_USER" />
 			</beans:map>
 		</beans:property>
 	</beans:bean>

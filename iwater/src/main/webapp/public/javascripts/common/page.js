@@ -22,13 +22,13 @@ define(["util","pageslide"],function (util) {
 	var getConfig = function(hashStr,url,callback){
         //TODO　hashStr 权限检查
         var pathName = window.location.pathname.replace(/\//,"")||"smartcloudServer";
-        util.get("/smartcloudServer/basic/user/isAdmin",{},function(flag){
-            util.get("/smartcloudServer/cache/redis/getAuthorize",{"type":"menu"},function(data){
-                if(flag||util.contains(data,"menu_"+pathName+hashStr)){
+        util.get("system/access/isAdmin",{},function(flag){
+            util.get("system/access/getAuthorize",{"type":"menu"},function(data){
+                //if(flag||util.contains(data,"menu_"+pathName+hashStr)){
                     $.getJSON(url,function(config){
                         hashStr = hashStr||config.index;
                         var hashPathArr = hashStr.split(".");
-                        var retObj = {"appPath":config.path,"code":config.code,"hashStr":hashStr};
+                        var retObj = {"appPath":config.htmlPath,"appjsPath":config.appjsPath,"code":config.code,"hashStr":hashStr};
                         var flag = true ;
                         //组装配置文件中的配置信息
                         for(var i=0,len=config.modules.length;i<len;i++){
@@ -52,10 +52,10 @@ define(["util","pageslide"],function (util) {
                         }
                         return callback(retObj);
                     })
-                }else{
-                    util.alert("地址错误或无权限访问！");
-                    return;
-                }
+                //}else{
+                //    util.alert("地址错误或无权限访问！");
+                //    return;
+                //}
             })
         })
 	};
@@ -72,7 +72,7 @@ define(["util","pageslide"],function (util) {
 	        }
 	    });
 		//加载对应的JS
-        require([config.jsPath],function(objCtrl){
+        require([config.appjsPath+config.jsPath],function(objCtrl){
             
             if(config.initMethod){
                 objCtrl[config.initMethod]();//页面初始化方法
@@ -86,8 +86,8 @@ define(["util","pageslide"],function (util) {
             });
 
 	        //获取组件资源权限 判断是否显示资源
-            util.get("/smartcloudServer/basic/user/isAdmin",{},function(flag){
-                util.get("/smartcloudServer/cache/redis/getAuthorize",{"type":"component"},function(data){
+            util.get("system/access/isAdmin",{},function(flag){
+                util.get("system/access/getAuthorize",{"type":"component"},function(data){
                     for(var i=0,len=config.components.length;i<len;i++){
                         if(config.components[i].limit){
                             //组件资源

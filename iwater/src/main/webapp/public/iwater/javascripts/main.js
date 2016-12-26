@@ -5,18 +5,18 @@
 requirejs.config({
     baseUrl: 'public',
     paths: {
-        "jquery":'javascripts/import/jquery-1.8.3',
-        "jquery.validform":'javascripts/import/jquery.validform',
-        "bootstrap":'javascripts/import/bootstrap.min',
-        "hashchange":'javascripts/import/jquery.ba-hashchange',
-        "ace":'javascripts/import/ace.min',
-        "pageslide":'javascripts/import/jquery.pageslide.min',
-        "util":'javascripts/core/lightwork.ui',
-        "page":'javascripts/core/lightwork.page',
-        "datatables":'javascripts/import/jquery.dataTables.min',
-        "datatables.bootstrap":'javascripts/import/jquery.dataTables.bootstrap',
-        "ztree":'javascripts/import/jquery.ztree.all-3.5.min',
-        "bootbox":'javascripts/import/bootbox.min'
+        "jquery":'core/javascripts/import/jquery-1.8.3',
+        "jquery.validform":'core/javascripts/import/jquery.validform',
+        "bootstrap":'core/javascripts/import/bootstrap.min',
+        "hashchange":'core/javascripts/import/jquery.ba-hashchange',
+        "ace":'core/javascripts/import/ace.min',
+        "pageslide":'core/javascripts/import/jquery.pageslide.min',
+        "util":'core/javascripts/core/lightwork.ui',
+        "page":'core/javascripts/core/lightwork.page',
+        "datatables":'core/javascripts/import/jquery.dataTables.min',
+        "datatables.bootstrap":'core/javascripts/import/jquery.dataTables.bootstrap',
+        "ztree":'core/javascripts/import/jquery.ztree.all-3.5.min',
+        "bootbox":'core/javascripts/import/bootbox.min'
     },
     shim: {
         'hashchange': { 

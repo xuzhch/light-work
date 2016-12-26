@@ -13,7 +13,8 @@ define(["page","util","smartcloud/resourceController","ztree"],function (page,ut
 		var params = params||{};//查询条件
 		var config = {
 			//http://10.25.76.206:18080/api/smartcloudServer/security/users/list?app_key=fdioanferik&app_secret=secret1&callback=?
-			"sAjaxSource":"system/uers/pagination?params="+JSON.stringify(params),
+			//在url后加上查询参数，如?username=sss
+				"sAjaxSource":"system/users/list",
 			"aoColumns":[
 					{ //自定义列多选框
 			            "mDataProp": "username",
@@ -45,7 +46,7 @@ define(["page","util","smartcloud/resourceController","ztree"],function (page,ut
 		var $form = $("#addUserForm");
 		util.validform($form,null,function(form){
     		var jsonForm = util.toJsonObject($form);
-    		util.post("system/uers/add",jsonForm,function(ret){
+    		util.post("system/users/add",jsonForm,function(ret){
     			util.message("保存成功","success");
     			init();
     		})
@@ -87,7 +88,7 @@ define(["page","util","smartcloud/resourceController","ztree"],function (page,ut
     */
 	var editUserCtrl = function(){
 		var username = util.getTableRadioVal("#users-table");
-		util.get("system/uers/getUser",{"username":username},function(result){
+		util.get("system/users/getUser",{"username":username},function(result){
 			var data = result[0];
 			data.rePassword = data.password;
 			util.renderForm("#editUserForm",result[0]);
@@ -95,7 +96,7 @@ define(["page","util","smartcloud/resourceController","ztree"],function (page,ut
 			util.validform($form,null,function(form){
                 //更新数据
                 var jsonForm = util.toJsonObject($form);
-                util.post("system/uers/update",jsonForm,function(result){
+                util.post("system/users/update",jsonForm,function(result){
                 	util.message("更新成功","success");
                 	init();//重新初始化
                 })
@@ -111,7 +112,7 @@ define(["page","util","smartcloud/resourceController","ztree"],function (page,ut
 	var deleteUser = function(){
 		var username = util.getTableRadioVal("#users-table");
 		if(username){
-			util.post("system/uers/delete",{"username":username},function(result){
+			util.post("system/users/delete",{"username":username},function(result){
 				util.message("删除成功","success");
 				init();
 			})
@@ -143,7 +144,7 @@ define(["page","util","smartcloud/resourceController","ztree"],function (page,ut
 	var authorizeCtrl = function(){
 		resource.getResource(function(){
 			var username = util.getTableRadioVal("#users-table");
-			util.get("system/uers/getUser",{"username":username},function(data){
+			util.get("system/users/getUser",{"username":username},function(data){
 				var obj = {
 					"menus":data[0].menus,
 					"components":data[0].components,
@@ -163,7 +164,7 @@ define(["page","util","smartcloud/resourceController","ztree"],function (page,ut
 			"username":username,
 			"resource":resourceObj
 		}
-		util.post("system/uers/addResource",obj,function(data){
+		util.post("system/ussers/addResource",obj,function(data){
 			util.message("授权成功","success");	
             page.slideHide();
             return false;

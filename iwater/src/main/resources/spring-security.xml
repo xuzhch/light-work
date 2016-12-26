@@ -8,6 +8,8 @@
 
 	<http use-expressions="false" auto-config="false"
 		entry-point-ref="myAuthenticationEntryPoint">
+		
+		<csrf disabled="true"/> 
 
 		<!-- 资源访问权限请在lightWorkSecurityMetadataSource中设置 -->
 		<intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
@@ -39,7 +41,7 @@
 	<beans:bean id="lightWorkAuthenticationFilter" init-method="init"
 		class="com.baosight.iwater.core.security.LightWorkAuthenticationFilter">
 		<beans:property name="authenticationManager" ref="lightWorkAuthenticationManager" />
-		<beans:property name="successUrl" value="/index2.html" /> <!-- 登录成功后跳转的页面 -->
+		<beans:property name="successUrl" value="/index.html" /> <!-- 登录成功后跳转的页面 -->
 		<beans:property name="errorUrl" value="/login.html" /> <!-- 登录验证失败后跳转的页面 -->
 		<beans:property name="filterProcessesUrl" value="/login" /> <!-- 在登录页面中指定登录验证url，过滤器在匹配该url时进行验证登录 -->
 	</beans:bean>

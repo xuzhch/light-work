@@ -22,8 +22,8 @@ define(["util","pageslide"],function (util) {
 	var getConfig = function(hashStr,url,callback){
         //TODO　hashStr 权限检查
         var pathName = window.location.pathname.replace(/\//,"")||"smartcloudServer";
-        util.get("system/access/isAdmin",{},function(flag){
-            util.get("system/access/getAuthorize",{"type":"menu"},function(data){
+        //util.get("system/access/isAdmin",{},function(flag){
+        //    util.get("system/access/getAuthorize",{"type":"menu"},function(data){
                 //if(flag||util.contains(data,"menu_"+pathName+hashStr)){
                     $.getJSON(url,function(config){
                         hashStr = hashStr||config.index;
@@ -46,18 +46,18 @@ define(["util","pageslide"],function (util) {
                                 }
                             }
                         }
-                        if(flag){
-                            util.alert("地址错误！");
-                            return;
-                        }
+//                        if(flag){
+//                            util.alert("地址错误！");
+//                            return;
+//                        }
                         return callback(retObj);
                     })
                 //}else{
                 //    util.alert("地址错误或无权限访问！");
                 //    return;
                 //}
-            })
-        })
+ //           })
+ //       })
 	};
 	/**  
     * @description 对动态加载的页面进行操作
@@ -108,7 +108,7 @@ define(["util","pageslide"],function (util) {
                 var id = $(this).attr("id");
                 var optionCodeArr = optionCode.split(".");
                 $("#"+id).empty();
-                $.getJSON("/config/select.json",function(select){
+                $.getJSON("public/config/select.json",function(select){
                     if(optionCodeArr[0]=="JSON"){
                         var optionJSON = select.JSON[optionCodeArr[1]];
                         //动态生成option

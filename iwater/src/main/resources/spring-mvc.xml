@@ -14,14 +14,13 @@
 	<mvc:annotation-driven />
 
 	<!-- 资源路径映射 -->
-	<mvc:resources mapping="/public/**" location="/public/" />
-	<mvc:resources mapping="/images/**" location="/images/" />
-	<mvc:resources mapping="/css/**" location="/css/" />
-	<mvc:resources mapping="/login.html" location="/public/login.html" />
-	<mvc:resources mapping="/index.html" location="/public/index.html" />
-	<mvc:resources mapping="/accessDenied.html" location="/public/accessDenied.html" />
-	<mvc:resources mapping="/*" location="/public/index.html" />
-
+	<mvc:resources mapping="/public/**" location="/public/"  cache-period="31556926"/>
+	<mvc:resources mapping="/images/**" location="/images/"  cache-period="31556926"/>
+	<mvc:resources mapping="/css/**" location="/css/"  cache-period="31556926"/>
+	<mvc:resources mapping="/login.html" location="/public/login.html"  cache-period="31556926"/>
+	<mvc:resources mapping="/index.html" location="/public/index.html"  cache-period="31556926"/>
+	<mvc:resources mapping="/accessDenied.html" location="/public/accessDenied.html"  cache-period="31556926"/>
+	<mvc:resources mapping="/*" location="/public/index.html"  cache-period="31556926"/>
 
 	<!--集成Thymeleaf模板引擎，文档参见 http://www.thymeleaf.org/doc/tutorials/2.1/thymeleafspring.html 
 		，实际示例请在浏览器中查看/seedstartermng -->
@@ -65,9 +64,9 @@
 	<!-- **************************************************************** -->
 	<context:component-scan base-package="thymeleafexamples.stsm" />
 
-	<mvc:annotation-driven conversion-service="conversionService" />
+	<mvc:annotation-driven conversion-service="thymeleafConversionService" />
 
-	<bean id="conversionService"
+	<bean id="thymeleafConversionService"
 		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
 		<property name="formatters">
 			<set>

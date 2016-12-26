@@ -39,7 +39,7 @@
 	<beans:bean id="lightWorkAuthenticationFilter" init-method="init"
 		class="com.baosight.iwater.core.security.LightWorkAuthenticationFilter">
 		<beans:property name="authenticationManager" ref="lightWorkAuthenticationManager" />
-		<beans:property name="successUrl" value="/index.html" /> <!-- 登录成功后跳转的页面 -->
+		<beans:property name="successUrl" value="/index2.html" /> <!-- 登录成功后跳转的页面 -->
 		<beans:property name="errorUrl" value="/login.html" /> <!-- 登录验证失败后跳转的页面 -->
 		<beans:property name="filterProcessesUrl" value="/login" /> <!-- 在登录页面中指定登录验证url，过滤器在匹配该url时进行验证登录 -->
 	</beans:bean>
@@ -81,7 +81,7 @@
 				
 				<!-- url的访问权限, 有多个权限的用“,”隔开，如ROLE_USER,ROLE_ADMIN-->
 				<beans:entry key="/index.html" value="ROLE_USER" />
-				<beans:entry key="/" value="ROLE_USER" />
+				<beans:entry key="/" value="ROLE_USER" /><!--直接访问http://localhost:8080/xxx，会需要验证“/”的权限-->
 			</beans:map>
 		</beans:property>
 	</beans:bean>

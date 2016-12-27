@@ -36,8 +36,13 @@ define(["page","util","app/system/resourceController","ztree"],function (page,ut
     * @description 新增用户页面显示
     */
 	var addUser = function(){
-		page.slidePage("user.add");
+		page.slidePage("system.users.add");
 	};
+	
+	var add = function(){
+		
+	}
+	
 	/**  
     * @description 新增用户操作
     */
@@ -173,6 +178,7 @@ define(["page","util","app/system/resourceController","ztree"],function (page,ut
 
 	return {
 		list:list,
+		add:add,
 		addUser:addUser,
 		queryUser:queryUser,
 		editUser:editUser,

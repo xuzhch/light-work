@@ -1,7 +1,7 @@
 /**
  * 用户信息操作
  */
-define(["util"], function(page, util, resource) {
+define(["util"], function(util) {
 	
 	var getUser = function(username, callback) {
 		util.get("system/users/getUser",{"username":username},function(result){
@@ -13,17 +13,15 @@ define(["util"], function(page, util, resource) {
 	var saveUser = function(data, callback) {
 		util.post("system/users/update",data,function(result){
 			//do something
-			callback(result);
+			return callback(result);
         })
 	};
 
 	var addUser = function(data, callback) {
 		util.post("system/users/add", data, function(result) {
 			//do something
-			util.alert("保存成功4","success");
-			callback(result);
-		})
-		return false;
+			return callback(result);
+		})		
     };
 
 	return {

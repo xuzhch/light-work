@@ -44,9 +44,9 @@ define(["page","util","app/system/resourceController","app/system/service/userSe
 		util.validform($form,null,function(form){
     		var jsonForm = util.toJsonObject($form);
     		userService.addUser(jsonForm,function(ret){
-    			util.alert("保存成功","success");   
-    			list();
     			page.slideHide();
+    			list();    			
+    			util.alert("保存成功","success"); 
     		});    		
     		return false;
     	})

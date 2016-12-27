@@ -1,4 +1,4 @@
-package com.baosight.iwater.pojo;
+package com.baosight.iwater.system.user.pojo;
 
 public class User {
     private Integer id;

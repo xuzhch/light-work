@@ -1,4 +1,4 @@
-package com.baosight.iwater.controller;
+package com.baosight.iwater.system.user.controller;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.baosight.iwater.pojo.User;
-import com.baosight.iwater.service.IUserService;
+import com.baosight.iwater.system.user.pojo.User;
+import com.baosight.iwater.system.user.service.IUserService;
 
 @Controller
 @RequestMapping("/user")

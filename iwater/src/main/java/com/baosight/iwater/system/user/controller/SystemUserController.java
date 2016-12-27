@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.baosight.iwater.pojo.User;
-import com.baosight.iwater.service.IUserService;
+import com.baosight.iwater.system.user.pojo.User;
+import com.baosight.iwater.system.user.service.IUserService;
 
 @RestController
 @RequestMapping("/system/users")

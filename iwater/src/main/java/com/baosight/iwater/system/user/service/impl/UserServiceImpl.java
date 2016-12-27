@@ -1,12 +1,12 @@
-package com.baosight.iwater.service.impl;
+package com.baosight.iwater.system.user.service.impl;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.baosight.iwater.dao.UserMapper;
-import com.baosight.iwater.pojo.User;
-import com.baosight.iwater.service.IUserService;
+import com.baosight.iwater.system.user.dao.UserMapper;
+import com.baosight.iwater.system.user.pojo.User;
+import com.baosight.iwater.system.user.service.IUserService;
 
 @Service("userService")
 public class UserServiceImpl implements IUserService {

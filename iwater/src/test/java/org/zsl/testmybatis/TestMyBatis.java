@@ -10,8 +10,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.AntPathMatcher;
 
 import com.alibaba.fastjson.JSON;
-import com.baosight.iwater.pojo.User;
-import com.baosight.iwater.service.IUserService;
+import com.baosight.iwater.system.user.pojo.User;
+import com.baosight.iwater.system.user.service.IUserService;
 
 @RunWith(SpringJUnit4ClassRunner.class) // 表示继承了SpringJUnit4ClassRunner类
 @ContextConfiguration(locations = { "classpath:spring-mybatis.xml" })

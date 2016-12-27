@@ -1,6 +1,6 @@
-package com.baosight.iwater.dao;
+package com.baosight.iwater.system.user.dao;
 
-import com.baosight.iwater.pojo.User;
+import com.baosight.iwater.system.user.pojo.User;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);

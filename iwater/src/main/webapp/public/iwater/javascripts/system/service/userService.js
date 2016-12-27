@@ -20,6 +20,7 @@ define(["util"], function(page, util, resource) {
 	var addUser = function(data, callback) {
 		util.post("system/users/add", data, function(result) {
 			//do something
+			console.log("新增用户!");
 			return callback(result);
 		})		
 	};

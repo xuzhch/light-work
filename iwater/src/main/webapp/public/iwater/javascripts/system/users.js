@@ -40,23 +40,25 @@ define(["page","util","app/system/resourceController","app/system/service/userSe
 	};
 	
 	var add = function(){
-		
+		var $form = $("#addUserForm");
+		util.validform($form,null,function(form){
+			util.alert("保存成功1","success");
+//    		var jsonForm = util.toJsonObject($form);
+//    		util.alert("保存成功2","success");
+//    		userService.addUser(jsonForm,function(){
+//    			util.alert("保存成功3","success");
+//    			//list();
+//    			//page.slideHide();
+//        		return;
+//    		});    		
+    	})
 	}
 	
 	/**  
     * @description 新增用户操作
     */
 	var addUserCtrl = function(){
-		var $form = $("#addUserForm");
-		util.validform($form,null,function(form){
-    		var jsonForm = util.toJsonObject($form);
-    		userService.addUser(jsonForm,function(){
-    			util.message("保存成功","success");
-    			list();
-    		});
-    		page.slideHide();
-    		return false;
-    	})
+		
 	};
 	/**  
     * @description 查询用户页面显示
@@ -94,7 +96,7 @@ define(["page","util","app/system/resourceController","app/system/service/userSe
 		var username = util.getTableRadioVal("#users-table");
 		userService.getUser(username,function(data){
 			data.rePassword = data.password;
-			util.renderForm("#editUserForm",result[0]);
+			util.renderForm("#editUserForm",data);
 			var $form = $("#editUserForm");
 			util.validform($form,null,function(form){
                 //更新数据

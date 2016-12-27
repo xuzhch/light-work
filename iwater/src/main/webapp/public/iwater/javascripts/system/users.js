@@ -7,7 +7,7 @@ define(["page","util","app/system/resourceController","ztree"],function (page,ut
     * @description 页面初始化 列表显示
     * @param params 查询条件
     */
-	var init = function(params){
+	var list = function(params){
 
 		var params = params||{};//查询条件
 		var config = {
@@ -172,7 +172,7 @@ define(["page","util","app/system/resourceController","ztree"],function (page,ut
 
 
 	return {
-		init:init,
+		list:list,
 		addUser:addUser,
 		queryUser:queryUser,
 		editUser:editUser,

@@ -2,7 +2,7 @@
 	
 	{"name":"智慧云平台","app":"smartcloudServer","hash":"","pic":"","desc":"智慧云平台","children":[
         {"name":"用户与权限管理","hash":"org","pic":"icon-desktop","desc":"用户与权限管理","children":[
-            {"name":"用户列表","hash":"user.list","desc":"用户列表"},
+            {"name":"用户列表","hash":"system.users.list","desc":"用户列表"},
             {"name":"角色列表","hash":"role.list","desc":"角色列表"},
             {"name":"部门列表","hash":"dept.list","desc":"部门列表"},
             {"name":"用户组列表","hash":"usergroup.list","desc":"用户组列表"}

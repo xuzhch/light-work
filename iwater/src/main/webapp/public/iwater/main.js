@@ -50,15 +50,24 @@ requirejs.config({
 });
 
 
+/**
+ * 设置应用的基本参数
+ */
 function ApplicationContext(){
 	this.name = "iwater";
     this.title = "智慧水务平台";	
-    this.appPath = "public/"+this.name; //设置应用的访问路径
-    this.appConfigPath = this.appPath+"/config/app.json";
-    this.appMenuPath = this.appPath+"/config/menu.json";
-    this.appComponentPath = this.appPath+"/config/component.json";
-    this.appSelectPath = this.appPath+"/config/select.json";
-    this.appJsPath = this.name+"/javascripts"; //注意和上面的路径不同，在应用中会和requirejs.config中的baseurl一起组成完整的相对路径
+    this.appPath = "public/iwater"; //设置应用的访问路径
+    this.indexPage = "system.users.list";
+    
+    this.code = "component_smartcloudServer";
+    this.pCode = "component_root";
+    
+    this.htmlPath = "/html";
+    this.javascriptsPath = "/javascripts"; 
+    this.appMenuPath = this.appPath + "/config/menu.json";
+    this.appComponentPath = this.appPath + "/config/component.json";
+    this.appSelectPath = this.appPath + "/config/select.json";
+    
 }
 
 //全局变量.

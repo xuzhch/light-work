@@ -10,20 +10,24 @@ define([ "util", "pageslide" ], function(util) {
 		error : function(jqXHR, textStatus, errorThrown) {			
 			switch (jqXHR.status) {
 			case (500):
-				alert("服务器系统内部错误");
+				util.alert("发送请求到服务端出现异常：服务器系统内部错误，请与管理员联系");
+				break;
+			case (404):
+				util.alert("发送请求到服务端出现异常：资源无法找到，请与管理员联系");
 				break;
 			case (401):
-				alert("未登录");
+				util.alert("发送请求到服务端出现异常：未登录，请与管理员联系");
 				break;
 			case (403):
-				alert("无权限执行此操作");
+				util.alert("发送请求到服务端出现异常：无权限执行此操作，请与管理员联系");
 				break;
 			case (408):
-				alert("请求超时");
+				util.alert("发送请求到服务端出现异常：请求超时，请与管理员联系");
 				break;
 			default:
-				alert("未知错误");
+				util.alert("发送请求到服务端出现异常，请与管理员联系");
 			}
+			console.error(errorThrown);
 			throw errorThrown;
 		}
 	});

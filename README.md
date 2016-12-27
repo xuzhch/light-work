@@ -1,5 +1,5 @@
 # LightWork Web框架
-作者：xuzhengchao  联系方式：QQ群591747485
+联系方式：QQ群591747485
 
 LightWork是一款轻量级JavaEE Web框架，基于Spring4+SpringMVC4+MyBatis3实现，运用了前后端分离的设计思想，前端和服务端实现了松耦合，通过RESTful服务接口交互数据。
 
@@ -11,7 +11,7 @@ LightWork是一款轻量级JavaEE Web框架，基于Spring4+SpringMVC4+MyBatis3�
 
 3、前端通过HTML5+CSS+JavaScript技术实现，能够与多种平台（Java, .NET, NodeJS等）的服务端集成。
 
-4、前端借鉴了AngularJS的设计思路，实现了MVC模式。可通过类似java package方式调用js方法和页面（如system.user.add形式），提供Handlebars.js模版引擎，逻辑清晰，代码简洁。
+4、前端借鉴了AngularJS的设计思路，实现了MVC模式。可通过类似java package方式调用js方法和页面（如system.user.add形式），增加service层，界面操作与业务逻辑相分离，逻辑清晰，代码简洁。
 
 5、前端提供了多种web界面组件，如侧滑显示、下拉框、弹出框、模式对话框、分页列表、文件上传、树、CheckBox、RadioBox等。
 

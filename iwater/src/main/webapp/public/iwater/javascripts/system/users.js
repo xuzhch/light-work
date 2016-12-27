@@ -1,7 +1,7 @@
 /**
 * 用户信息操作
 */
-define(["page","util","app/system/resourceController","ztree"],function (page,util,resource) {
+define(["page","util","app/system/resourceController","app/system/service/userService","ztree"],function (page,util,resource,userService) {
 
 	/**  
     * @description 页面初始化 列表显示
@@ -50,10 +50,10 @@ define(["page","util","app/system/resourceController","ztree"],function (page,ut
 		var $form = $("#addUserForm");
 		util.validform($form,null,function(form){
     		var jsonForm = util.toJsonObject($form);
-    		util.post("system/users/add",jsonForm,function(ret){
+    		userService.addUser(jsonForm,function(){
     			util.message("保存成功","success");
-    			init();
-    		})
+    			list();
+    		});
     		page.slideHide();
     		return false;
     	})
@@ -92,22 +92,20 @@ define(["page","util","app/system/resourceController","ztree"],function (page,ut
     */
 	var editUserCtrl = function(){
 		var username = util.getTableRadioVal("#users-table");
-		util.get("system/users/getUser",{"username":username},function(result){
-			var data = result[0];
+		userService.getUser(username,function(data){
 			data.rePassword = data.password;
 			util.renderForm("#editUserForm",result[0]);
 			var $form = $("#editUserForm");
 			util.validform($form,null,function(form){
                 //更新数据
                 var jsonForm = util.toJsonObject($form);
-                util.post("system/users/update",jsonForm,function(result){
+                userService.saveUser(jsonForm,function(result){
                 	util.message("更新成功","success");
-                	init();//重新初始化
-                })
+                	list();//重新初始化
+                });
                 page.slideHide();
                 return false;
             })
-			
 		});
 	}
 	/**  

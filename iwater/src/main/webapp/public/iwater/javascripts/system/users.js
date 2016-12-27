@@ -42,15 +42,13 @@ define(["page","util","app/system/resourceController","app/system/service/userSe
 	var add = function(){
 		var $form = $("#addUserForm");
 		util.validform($form,null,function(form){
-			util.alert("保存成功1","success");
-//    		var jsonForm = util.toJsonObject($form);
-//    		util.alert("保存成功2","success");
-//    		userService.addUser(jsonForm,function(){
-//    			util.alert("保存成功3","success");
-//    			//list();
-//    			//page.slideHide();
-//        		return;
-//    		});    		
+    		var jsonForm = util.toJsonObject($form);
+    		util.post("system/users/add",jsonForm,function(ret){
+    			util.message("保存成功","success");
+    			list();
+    		})
+    		page.slideHide();
+    		return false;
     	})
 	}
 	

@@ -48,7 +48,7 @@ public class LightWorkSecurityInterceptor extends AbstractSecurityInterceptor im
         //里面调用InvocationSecurityMetadataSource的getAttributes(Object object)这个方法获取url对应的所有权限，如角色、用户组 
         //再调用AccessDecisionManager的decide方法来校验用户的权限是否足够，用户信息中包含该用户被分配的角色、用户组等信息 
 		String requestUrl = fi.getRequestUrl();
-		logger.debug("资源访问权限验证启动, url为:'"+requestUrl+"'");
+		logger.info("资源访问权限验证开始, url为:'"+requestUrl+"'");
 		InterceptorStatusToken token = super.beforeInvocation(fi);
 		
 		//执行下一个拦截器

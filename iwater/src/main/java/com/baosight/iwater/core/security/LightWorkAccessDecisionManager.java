@@ -47,13 +47,13 @@ public class LightWorkAccessDecisionManager implements AccessDecisionManager {
 			// 用户所拥有的权限authentication
 			for (GrantedAuthority ga : authentication.getAuthorities()) {
 				if (needPermission.equals(ga.getAuthority())) {
-					logger.debug("资源'"+requestUrl+"'访问权限判定通过，开始处理该资源访问...");
+					logger.info("资源'"+requestUrl+"'访问权限判定通过，开始处理该资源访问...");
 					return;
 				}
 			}
 		}
 		// 没有权限
-		logger.debug("资源'"+requestUrl+"'访问权限判定未通过，跳转到其他页面进行访问...");
+		logger.warn("资源'"+requestUrl+"'访问权限判定未通过，跳转到其他页面进行访问...");
 		throw new AccessDeniedException(" 资源'"+requestUrl+"'没有权限访问！ ");
 	}
 

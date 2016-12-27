@@ -13,17 +13,18 @@ define(["util"], function(page, util, resource) {
 	var saveUser = function(data, callback) {
 		util.post("system/users/update",data,function(result){
 			//do something
-			return callback(result);
+			callback(result);
         })
 	};
 
 	var addUser = function(data, callback) {
 		util.post("system/users/add", data, function(result) {
 			//do something
-			console.log("新增用户!");
-			return callback(result);
-		})		
-	};
+			util.alert("保存成功4","success");
+			callback(result);
+		})
+		return false;
+    };
 
 	return {
 		getUser : getUser,

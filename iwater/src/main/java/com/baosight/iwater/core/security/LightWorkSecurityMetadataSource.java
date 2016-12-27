@@ -84,7 +84,7 @@ public class LightWorkSecurityMetadataSource implements FilterInvocationSecurity
 			if (isMatch) {
 				if ("IS_AUTHENTICATED_ANONYMOUSLY".equalsIgnoreCase(role)) {
 					// 不受权限控制
-					logger.debug("资源'" + requestUrl + "'无需验证授权，可匿名直接访问...");
+					logger.info("资源'" + requestUrl + "'无需验证授权，可匿名直接访问...");
 					return null;
 				} else {
 					// 有多个权限的用“,”隔开，如ROLE_USER,ROLE_ADMIN

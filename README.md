@@ -11,7 +11,7 @@ LightWork是一款轻量级JavaEE Web框架，基于Spring4+SpringMVC4+MyBatis3�
 
 3、前端通过HTML5+CSS+JavaScript技术实现，能够与多种平台（Java, .NET, NodeJS等）的服务端集成。
 
-4、前端借鉴了AngularJS的设计思路，实现了简单MVC模式，提供Handlebars.js模版引擎，逻辑清晰，代码简洁。
+4、前端借鉴了AngularJS的设计思路，实现了MVC模式。可通过类似java package方式调用js方法和页面（如system.user.add形式），提供Handlebars.js模版引擎，逻辑清晰，代码简洁。
 
 5、前端提供了多种web界面组件，如侧滑显示、下拉框、弹出框、模式对话框、分页列表、文件上传、树、CheckBox、RadioBox等。
 
@@ -31,7 +31,7 @@ LightWork是一款轻量级JavaEE Web框架，基于Spring4+SpringMVC4+MyBatis3�
 
 2、参与本开源框架开发，贡献代码，请使用git工具下载项目进行开发。
 
-3、推荐使用Eclipse neon2进行开发，已内置Maven、git等插件，
+3、推荐使用Eclipse neon2进行开发，已内置Maven、git等插件。选择导入项目，在“import”弹出框中选择“Git”，然后再选择“Projects from Git”。
 
 下载地址：http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/neon2
 

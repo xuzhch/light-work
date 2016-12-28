@@ -38,6 +38,7 @@ public class TestMyBatis {
 
 	@Test
 	public void test1() {
+		logger.info(Thread.currentThread().getContextClassLoader().getResource(""));
 		User user = userService.getUserById(1);
 		// System.out.println(user.getUserName());
 		// logger.info("值："+user.getUserName());
@@ -45,11 +46,5 @@ public class TestMyBatis {
 		logger.info(JSON.toJSONString(user));
 	}
 	
-	@Test
-	public void testSystemUser() {
-		SystemUser sysuser = new SystemUser();
-		sysuser.setUserName("admin");
-		List<SystemUser> list = userDao.queryList(sysuser);
-		logger.info(JSON.toJSONString(list));
-	}
+
 }

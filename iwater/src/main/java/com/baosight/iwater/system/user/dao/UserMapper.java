@@ -1,7 +1,10 @@
 package com.baosight.iwater.system.user.dao;
 
+import org.springframework.stereotype.Repository;
+
 import com.baosight.iwater.system.user.pojo.User;
 
+@Repository
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
 

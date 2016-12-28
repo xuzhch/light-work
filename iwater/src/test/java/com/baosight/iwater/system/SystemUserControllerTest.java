@@ -31,13 +31,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 //XML风格  
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration(value = "src/main/webapp")
-@ContextHierarchy({ @ContextConfiguration(locations = { "classpath:spring-mybatis.xml" }),
-		@ContextConfiguration(locations = { "classpath:spring-mvc.xml" })
+@ContextHierarchy({ @ContextConfiguration(name = "parent", locations = { "classpath:spring-mybatis.xml" }),
+		@ContextConfiguration(name = "child", locations = { "classpath:spring-mvc.xml" })
 
 })
 public class SystemUserControllerTest {
 	@Autowired
-	private WebApplicationContext context;
+	private WebApplicationContext context; 
 	private MockMvc mockMvc;
 
 	@Before
@@ -47,7 +47,7 @@ public class SystemUserControllerTest {
 	
 	@Test
 	public void testList() throws Exception {
-		this.mockMvc.perform(get("/system/users/list"))
+		this.mockMvc.perform(get("/system/users/listtest"))
 		.andExpect(status().isOk())
 		.andReturn();
 		

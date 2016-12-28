@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<!-- -->
+	<classPathEntry
+		location="C:\Users\chaos\.m2\repository\mysql\mysql-connector-java\5.1.30\mysql-connector-java-5.1.30.jar" />
+		
+	<context id="context1">
+		<jdbcConnection connectionURL="jdbc:mysql://localhost:3306/paas"
+			driverClass="com.mysql.jdbc.Driver" password="root" userId="root" />
+		<javaModelGenerator targetPackage="com.baosight.iwater.system.user.pojo"
+			targetProject="iwater" />
+		<sqlMapGenerator targetPackage="com.baosight.iwater.system.user.sql"
+			targetProject="iwater" />
+		<javaClientGenerator targetPackage="com.baosight.iwater.system.user.dao"
+			targetProject="iwater" type="XMLMAPPER" />
+		<table schema="paas" tableName="b_user" domainObjectName="SystemUser" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"  
+    enableSelectByExample="false" selectByExampleQueryId="false" >
+		</table>
+	</context>
+</generatorConfiguration>

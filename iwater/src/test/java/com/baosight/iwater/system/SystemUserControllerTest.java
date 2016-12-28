@@ -44,6 +44,14 @@ public class SystemUserControllerTest {
 	public void setUp() {
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
 	}
+	
+	@Test
+	public void testList() throws Exception {
+		this.mockMvc.perform(get("/system/users/list"))
+		.andExpect(status().isOk())
+		.andReturn();
+		
+	}
 
 	@Test
 	public void testView() throws Exception {

@@ -18,7 +18,7 @@ public class SystemUserServiceImpl implements ISystemUserService{
 	@Override
 	public List<SystemUser> getSystemUserList(SystemUser systemUser) {
 		// TODO Auto-generated method stub
-		return this.getSystemUserList(systemUser);
+		return this.systemUserDao.queryList(systemUser);
 	}
 
 	

@@ -42,12 +42,17 @@ define(["page","util","app/system/resourceController","app/system/service/userSe
 	var add = function(){
 		var $form = $("#addUserForm");
 		util.validform($form,null,function(form){
-    		var jsonForm = util.toJsonObject($form);
-    		userService.addUser(jsonForm,function(ret){
-    			page.slideHide();
-    			list();    			
-    			util.alert("保存成功","success"); 
-    		});    		
+			//注意此处出现异常时会导致页面刷新，应使用try catch
+			try{
+				var jsonForm = util.toJsonObject($form);
+	    		userService.addUser(jsonForm,function(ret){
+	    			page.slideHide();
+	    			list();    			
+	    			util.alert("保存成功","success"); 
+	    		});    	
+			}catch(e){
+				console.error(e);
+			}    			
     		return false;
     	})
 	}

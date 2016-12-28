@@ -21,7 +21,7 @@ define(["util"], function(util) {
 		util.post("system/users/add", data, function(result) {
 			//do something
 			return callback(result);
-		})		
+		})
     };
 
 	return {

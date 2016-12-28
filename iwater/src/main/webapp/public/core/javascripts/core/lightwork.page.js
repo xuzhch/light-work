@@ -148,7 +148,7 @@ define([ "util", "pageslide" ], function(util) {
 			try{
 				controllerObject[methodName]();// 页面初始化方法
 			}catch(e){
-				console.error("请检查'"+currentController.jsFullPath+"'中是否有'"+methodName+"()'方法，并配置了requirejs导出。");
+				console.error("请检查'"+APP_CONTEXT.CURRENT_CONTROLLER.jsFullPath+"'中是否有'"+methodName+"()'方法，并配置了requirejs导出。");
 			}
 		}
 	};

@@ -33,7 +33,9 @@ define([ "util", "pageslide" ], function(util) {
 	});
 
 	/**
-	 * @description 获取匹配的配置信息
+	 * @description 获取匹配的配置信息,hashStr形式有以下两种：htmlPackage_jsPackage，或简化写法，只写htmlPath
+	 * htmlPackage_jsPackage，如system.users.list_system.users.func，即加载system/users/list.html，然后调用system/users.js的func()方法，也可替换成其他方法
+	 * 只写htmlPackage，如system.users.list，默认js方法与html页面名称相同，相当于system.users.list_system.users.list
 	 * @param hashStr
 	 *            页面定位字符串
 	 * @param url
@@ -44,55 +46,70 @@ define([ "util", "pageslide" ], function(util) {
 	var parseHashStr = function(hashStr, callback) {
 		// TODO hashStr 权限检查
 		hashStr = hashStr || APP_CONTEXT.indexPage; // hashStr为空，则使用首页设置
+		var hashStrArr = hashStr.split("_");
+		var htmlPackageStr = hashStrArr[0];
+		var jsPackageStr = htmlPackageStr; //默认与htmlPackage相同
+		if(hashStrArr.length>1){
+			jsPackageStr = hashStrArr[1];
+		}
+		
+		var htmlParse = parsePackageString(htmlPackageStr);
+		var jsParse = parsePackageString(jsPackageStr);
 
-		// 取得方法名methodName
-		var hashPathArr = hashStr.split(".");
-		var methodName = hashPathArr[hashPathArr.length - 1];
+		var page = {};
+		page.hashStr = hashStr;
+		page.htmlParse = htmlParse;
+		page.jsParse = jsParse;
+		page.htmlPath = APP_CONTEXT.htmlPath + "/" + htmlParse.pagePath + "/"
+				+ htmlParse.pageName + ".html"; // 结果类似system/users/list.html
+		page.jsPath = APP_CONTEXT.javascriptsPath + "/" + jsParse.pagePath
+				+ ".js"; // 结果类似system/users.js
+		page.methodName = jsParse.pageName;
+		
+		page.htmlFullPath = APP_CONTEXT.appPath + page.htmlPath;
+		page.jsFullPath = APP_CONTEXT.appPath + page.jsPath;
+		return callback(page);
+	};
+	
+	var parsePackageString = function(packageStr){
+		// 取页面名pageName
+		var packageStrArr = packageStr.split(".");
+		var pageName = packageStrArr[packageStrArr.length - 1];
 
 		// 获得controller的路径controllerPath
-		var lastIndex = hashStr.lastIndexOf(".");
-		var controllerPackage = hashStr.substring(0, lastIndex);
-		var controllerPath = controllerPackage.replace(".", "/");
+		var lastIndex = packageStr.lastIndexOf(".");
+		var pagePackage = packageStr.substring(0, lastIndex);
+		var pagePath = pagePackage.replace(".", "/");
 
-		var retObj = {};
-		retObj.hashStr = hashStr; // 结果类似system.users.list
-		retObj.controllerPackage = controllerPackage; // 结果类似system.users
-		retObj.controllerPath = controllerPath; // 结果类似system/users
-		retObj.methodName = methodName; // 结果类似list
-		retObj.htmlPath = APP_CONTEXT.htmlPath + "/" + controllerPath + "/"
-				+ methodName + ".html"; // 结果类似system/users/list.html
-		retObj.jsPath = APP_CONTEXT.javascriptsPath + "/" + controllerPath
-				+ ".js"; // 结果类似system/users.js
-		retObj.htmlFullPath = APP_CONTEXT.appPath + retObj.htmlPath;
-		retObj.jsFullPath = APP_CONTEXT.appPath + retObj.jsPath;
-		
-		APP_CONTEXT.CURRENT_HASH_STR = hashStr; // 设置为当前hashStr
-		APP_CONTEXT.CURRENT_CONTROLLER = retObj;
-		return callback(retObj);
-	};
+		var parse = {};
+		parse.pagePackage = pagePackage; // 结果类似system.users
+		parse.pagePath = pagePath; // 结果类似system/users
+		parse.pageName = pageName; // 结果类似list
+		return parse;
+	}
 
 	/**
 	 * @description 对动态加载的页面进行操作
 	 * @param hashStr
 	 *            页面定位字符串
-	 * @param config
+	 * @param page
 	 *            配置信息
 	 */
-	var pageController = function(config) {
+	var pageController = function(page) {
 		// 给页面赋予属性
 		$("div[ng-page]").each(function() {
 			if (typeof ($(this).attr("ng-page-id")) == "undefined") {
-				$(this).attr("ng-page-id", config.hashStr);
+				$(this).attr("ng-page-id", page.hashStr);
 			}
 		});
 		// 加载对应的JS
-		require([ config.jsFullPath], function(controllerObject) {
+		require([ page.jsFullPath], function(controllerObject) {
 			
 			//执行页面对应的js方法
-			executeMethod(controllerObject,config.methodName);
+			executeMethod(controllerObject,page.methodName);
 			
 			// 为页面属性赋予事件功能
-			$("div[ng-page-id='" + config.hashStr + "']").find("*[ng-click]")
+			$("div[ng-page-id='" + page.hashStr + "']").find("*[ng-click]")
 					.each(function(index, val) {
 						$(this).click(function(event) {
 							var methodName = $(this).attr("ng-click");// 获取属性值
@@ -101,7 +118,7 @@ define([ "util", "pageslide" ], function(util) {
 					});
 
 			// select 绑定option
-			$("div[ng-page-id='" + config.hashStr + "']").find(
+			$("div[ng-page-id='" + page.hashStr + "']").find(
 					"select[optionCode]").each(
 					function() {
 						var optionCode = $(this).attr("optionCode");// 类型 +
@@ -148,7 +165,7 @@ define([ "util", "pageslide" ], function(util) {
 			try{
 				controllerObject[methodName]();// 页面初始化方法
 			}catch(e){
-				console.error("请检查'"+APP_CONTEXT.CURRENT_CONTROLLER.jsFullPath+"'中是否有'"+methodName+"()'方法，并配置了requirejs导出。");
+				console.error("请检查'"+APP_CONTEXT.CURRENT_PAGE.jsFullPath+"'中是否有'"+methodName+"()'方法，并配置了requirejs导出。");
 			}
 		}
 	};
@@ -163,12 +180,13 @@ define([ "util", "pageslide" ], function(util) {
 	 *            jquery 定位符 动态页面显示的位置
 	 */
 	var parsePage = function(hashStr, pos) {
-		parseHashStr(hashStr, function(config) {
+		parseHashStr(hashStr, function(page) {			
+			APP_CONTEXT.CURRENT_PAGE = page;
 			// 加载页面
 			pos = pos || "#page";
-			$(pos).load(config.htmlFullPath, function() {
+			$(pos).load(page.htmlFullPath, function() {
 				// 对加载的页面进行处理
-				pageController(config);
+				pageController(page);
 			});
 		})
 	};
@@ -183,14 +201,14 @@ define([ "util", "pageslide" ], function(util) {
 	 *            回调函数
 	 */
 	var slidePage = function(hashStr, callback) {
-		parseHashStr(hashStr, function(config) {
+		parseHashStr(hashStr, function(page) {
 			// 加载页面
 			$.pageslide({
-				href : config.htmlFullPath,
+				href : page.htmlFullPath,
 				direction : "left"
 			}, function() {
 				// 对加载的页面进行处理
-				pageController(config);
+				pageController(page);
 			});
 		})
 	};

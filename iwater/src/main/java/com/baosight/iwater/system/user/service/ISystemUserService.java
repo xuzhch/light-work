@@ -8,4 +8,6 @@ public interface ISystemUserService {
 	
 	public List<SystemUser> getSystemUserList(SystemUser systemUser);
 	
+	public SystemUser save(SystemUser systemUser);
+	
 }

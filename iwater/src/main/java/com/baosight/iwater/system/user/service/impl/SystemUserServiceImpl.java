@@ -21,6 +21,12 @@ public class SystemUserServiceImpl implements ISystemUserService{
 		return this.systemUserDao.queryList(systemUser);
 	}
 
+	@Override
+	public SystemUser save(SystemUser systemUser) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
 }

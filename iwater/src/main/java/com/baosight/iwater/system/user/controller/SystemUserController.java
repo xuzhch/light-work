@@ -4,10 +4,12 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,12 +43,17 @@ public class SystemUserController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value="/listtest", method=RequestMethod.GET)
-	public List<SystemUser> list(){
+	public List<SystemUser> listtest(){
 		SystemUser systemUser = new SystemUser();
 		List<SystemUser> list = this.systemUserService.getSystemUserList(systemUser);
 		return list;
 	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public  String create(@RequestBody @Valid SystemUser user) {
+		SystemUser savedUser = this.systemUserService.save(user);
+	    return savedUser.getUserId();
+	  }
 	
 	/**
 	 * 返回json数据

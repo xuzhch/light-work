@@ -37,6 +37,6 @@ LightWork是一款轻量级JavaEE Web框架，基于Spring4+SpringMVC4+MyBatis3�
 
 4、创建Maven web项目，Maven会自动构建按照pom.xml中的配置下载依赖的jar包。
 
-5、运行init.sql在MySQL数据库中创建数据库表，然后在jdbc.properties中配置好数据库连接。
+5、运行src/main/resources/init.sql，在MySQL数据库中创建数据库表，然后在jdbc.properties中配置好数据库连接。
 
-6、在Eclipse中配置好运行Server，如Tomcat8，将项目添加到server中即可发布运行。
+6、在Eclipse中配置好运行Server，如Tomcat8，将项目添加到server中即可发布运行，默认登录用户名密码为user/password。

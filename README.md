@@ -11,19 +11,21 @@ LightWork是一款轻量级JavaEE Web框架，基于Spring4+SpringMVC4+MyBatis3�
 
 3、前端通过HTML5+CSS+JavaScript技术实现，能够与多种平台（Java, .NET, NodeJS等）的服务端集成。
 
-4、前端借鉴了AngularJS的设计思路，实现了MVC模式。通过使用RequireJS实现了js模块化，可通过类似java package方式调用js方法和页面（如system.user.add形式），增加service层，界面操作与业务逻辑相分离，逻辑清晰，代码简洁。
+4、前端借鉴了AngularJS的设计思路，实现了MVC模式，增加service层，界面操作与业务逻辑相分离，逻辑清晰，代码简洁。
 
-5、前端提供了多种web界面组件，如侧滑显示、下拉框、弹出框、模式对话框、分页列表、文件上传、树、CheckBox、RadioBox等。
+5、前端通过使用RequireJS实现了js模块化，动态加载js和html文件，可通过类似java package方式调用js方法和页面（如system.user.add形式），提高了用户界面响应速度。
 
-6、服务端基于Spring4+SpringMVC4+MyBatis3实现，能够支持多种方式（Web浏览器、移动应用、桌面应用等）的前端。
+6、前端提供了多种web界面组件，如侧滑显示、下拉框、弹出框、模式对话框、分页列表、文件上传、树、CheckBox、RadioBox等。
 
-7、服务端集成了Spring Security组件，实现了用户验证和访问控制功能，可自定义用户验证方式和资源访问控制。
+7、服务端基于Spring4+SpringMVC4+MyBatis3实现，能够支持多种方式（Web浏览器、移动应用、桌面应用等）的前端。
 
-8、服务端支持RESTful服务接口便捷开发，支持json模式校验。
+8、服务端集成了Spring Security组件，实现了用户验证和访问控制功能，可自定义用户验证方式和资源访问控制。
 
-9、服务端集成Thymeleaf模板，替代jsp页面。
+9、服务端支持RESTful服务接口便捷开发，支持json模式校验。
 
-10、框架易于使用和学习，可充分利用第三方组件和网络资源。
+10、服务端集成Thymeleaf模板，替代jsp页面。
+
+11、框架易于使用和学习，可充分利用第三方组件和网络资源。
 
 二、下载与使用
 

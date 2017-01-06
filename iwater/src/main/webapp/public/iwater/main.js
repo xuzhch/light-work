@@ -33,6 +33,9 @@ requirejs
 				"jquery.validform" : {
 					deps : [ 'jquery' ]
 				},
+				"jquery.easyui" : {
+					deps : [ 'jquery' ]
+				},
 				"bootstrap" : {
 					deps : [ 'jquery' ]
 				},

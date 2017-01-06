@@ -60,6 +60,8 @@ define(["page","util","app/system/resourceController","app/system/service/userSe
 	var test = function(){
 		var dg = $('#dg').datagrid({
             url: 'public/core/datagrid_data1.json',
+            singleSelect:true,
+            collapsible:true,
             pagination: false,
             remoteFilter: true,
             rownumbers: true,

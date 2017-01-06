@@ -1,3 +1,4 @@
+<div ng-page>
 <div class="page-header" id="page-header">
     <h1>
         easyui列表
@@ -10,15 +11,44 @@
 
 	<div style="margin:20px 0;"></div>
 	
-	<table id="dg" title="Basic DataGrid" style="width:100%;height:304px">
+	    <p>
+         <button class="btn btn-primary second"  ng-click="addUser" id="addUser" ng-limit>
+           <i class="fa fa-plus"></i>
+            新增
+        </button>
+        <button class="btn btn-primary" ng-click="queryUser" id="queryUser">
+            <i class="fa fa-search"></i>
+            查询
+        </button>
+        <button class="btn btn-primary" ng-click="editUser" id="editUser" ng-limit>
+            <i class="fa fa-pencil"></i>
+            编辑
+        </button>
+        <button class="btn btn-primary" ng-click="deleteUser" id="deleteUser" ng-limit>
+            <i class="fa fa-trash-o"></i>
+            删除
+        </button>
+        <button class="btn btn-primary" ng-click="authorize" id="authorize" >
+            <i class="fa fa-cog"></i>
+            授权
+        </button>
+       <!--  <button class="btn btn-primary" ng-click="userPermission" id="userPermission" >
+           <i class="fa fa-list"></i>
+           查看权限
+       </button> -->
+        
+    </p>
+	
+	<table id="dg" title="产品列表" style="width:100%;height:340px">
 		<thead>
 			<tr>
-				<th data-options="field:'itemid',width:80">Item ID</th>
-				<th data-options="field:'productid',width:100">Product</th>
-				<th data-options="field:'listprice',width:80,align:'right'">List Price</th>
-				<th data-options="field:'unitcost',width:80,align:'right'">Unit Cost</th>
-				<th data-options="field:'attr1',width:250">Attribute</th>
-				<th data-options="field:'status',width:60,align:'center'">Status</th>
+				<th data-options="field:'itemid',width:80">单号</th>
+				<th data-options="field:'productid'" width="15%">产品</th>
+				<th data-options="field:'listprice',width:80,align:'right'">价格</th>
+				<th data-options="field:'unitcost',width:80,align:'right'">成本</th>
+				<th data-options="field:'attr1'" width="35%">属性</th>
+				<th data-options="field:'status',width:60,align:'center'">状态</th>
 			</tr>
 		</thead>
 	</table>
+</div>

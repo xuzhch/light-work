@@ -33,9 +33,9 @@ define([ "util", "pageslide" ], function(util) {
 	});
 
 	/**
-	 * @description 获取匹配的配置信息,hashStr形式有以下两种：htmlPackage_jsPackage，或简化写法，只写htmlPath
-	 * htmlPackage_jsPackage，如system.users.list_system.users.func，即加载system/users/list.html，然后调用system/users.js的func()方法，也可替换成其他方法
-	 * 只写htmlPackage，如system.users.list，默认js方法与html页面名称相同，相当于system.users.list_system.users.list
+	 * @description 获取匹配的配置信息,hashStr形式有以下两种：htmlPackage$$jsPackage，或简化写法，只写htmlPath
+	 * htmlPackage$$jsPackage，如system.users.list$$system.users.func，即加载system/users/list.html，然后调用system/users.js的func()方法，也可替换成其他方法
+	 * 只写htmlPackage，如system.users.list，默认js方法与html页面名称相同，相当于system.users.list$$system.users.list
 	 * @param hashStr
 	 *            页面定位字符串
 	 * @param url
@@ -46,7 +46,7 @@ define([ "util", "pageslide" ], function(util) {
 	var parseHashStr = function(hashStr, callback) {
 		// TODO hashStr 权限检查
 		hashStr = hashStr || APP_CONTEXT.indexPage; // hashStr为空，则使用首页设置
-		var hashStrArr = hashStr.split("_");
+		var hashStrArr = hashStr.split("$$");
 		var htmlPackageStr = hashStrArr[0];
 		var jsPackageStr = htmlPackageStr; //默认与htmlPackage相同
 		if(hashStrArr.length>1){
@@ -109,13 +109,20 @@ define([ "util", "pageslide" ], function(util) {
 			executeMethod(controllerObject,page.methodName);
 			
 			// 为页面属性赋予事件功能
-			$("div[ng-page-id='" + page.hashStr + "']").find("*[ng-click]")
-					.each(function(index, val) {
-						$(this).click(function(event) {
-							var methodName = $(this).attr("ng-click");// 获取属性值
-							buttonClick(controllerObject,methodName,event); // 在buttonClick中执行方法
-						});
+			var $ngpage = $("div[ng-page-id='" + page.hashStr + "']");
+			if($ngpage.length>0){
+				$ngpage.find("*[ng-click]")
+				.each(function(index, val) {
+					$(this).click(function(event) {
+						var methodName = $(this).attr("ng-click");// 获取属性值
+						console.info("开始调用'"+APP_CONTEXT.CURRENT_PAGE.jsFullPath+"中"+methodName+"()'方法。");
+						buttonClick(controllerObject,methodName,event); // 在buttonClick中执行方法
 					});
+				});
+			}else{
+				console.error("当前页面中无id为'"+page.hashStr+"'的DIV，请检查页面内容是否包含在<div ng-page/>中！");
+			}
+			
 
 			// select 绑定option
 			$("div[ng-page-id='" + page.hashStr + "']").find(

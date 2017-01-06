@@ -62,9 +62,9 @@ define(["page","util","app/system/resourceController","app/system/service/userSe
             url: 'public/core/datagrid_data1.json',
             singleSelect:true,
             collapsible:true,
-            pagination: false,
+            pagination: true,
             remoteFilter: true,
-            rownumbers: true,
+            rownumbers: false,
             method: 'get'
             
         });

@@ -9,6 +9,7 @@ requirejs
 				app : 'iwater/javascripts',
 				"jquery" : 'core/javascripts/import/jquery-1.8.3',
 				"jquery.validform" : 'core/javascripts/import/jquery.validform',
+				"jquery.easyui" : 'core/javascripts/import/jquery.easyui.min',
 				"bootstrap" : 'core/javascripts/import/bootstrap.min',
 				"hashchange" : 'core/javascripts/import/jquery.ba-hashchange',
 				"ace" : 'core/javascripts/import/ace.min',

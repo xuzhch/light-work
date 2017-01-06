@@ -57,6 +57,17 @@ define(["page","util","app/system/resourceController","app/system/service/userSe
     	})
 	}
 	
+	var test = function(){
+		var dg = $('#dg').datagrid({
+            url: 'public/core/datagrid_data1.json',
+            pagination: false,
+            remoteFilter: true,
+            rownumbers: true,
+            method: 'get'
+            
+        });
+	}
+	
 	/**  
     * @description 新增用户操作
     */
@@ -182,6 +193,7 @@ define(["page","util","app/system/resourceController","app/system/service/userSe
 	return {
 		list:list,
 		add:add,
+		test:test,
 		addUser:addUser,
 		queryUser:queryUser,
 		editUser:editUser,

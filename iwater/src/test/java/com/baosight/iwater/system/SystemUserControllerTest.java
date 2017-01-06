@@ -59,7 +59,7 @@ public class SystemUserControllerTest {
 		.andExpect(status().isOk())
 		.andExpect(jsonPath("doc", is(notNullValue())))
 		.andExpect(jsonPath("doc.sEcho", is(notNullValue())))
-		.andExpect(jsonPath("doc.sEcho", is("1")))
+		.andExpect(jsonPath("doc.sEcho", is("2")))
 		.andReturn();
 		
 	}

@@ -43,6 +43,7 @@ public class SystemUserController {
 	 * @param id
 	 * @return
 	 */
+	@RequestMapping(value="/listtest", method=RequestMethod.GET)
 	public List<SystemUser> listtest(){
 		SystemUser systemUser = new SystemUser();
 		List<SystemUser> list = this.systemUserService.getSystemUserList(systemUser);

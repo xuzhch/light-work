@@ -13,8 +13,8 @@ public class PayServer {
 		ServerSocket server = new ServerSocket(5203);
 		while (true) {
 			Socket socket = server.accept();
-			exSocketServer(socket);
 			System.out.println("Start...");
+			exSocketServer(socket);			
 		}
 	}
 
@@ -36,9 +36,9 @@ public class PayServer {
 						if (msg == null) {
 							break;
 						}
-						System.out.println("Client :" + msg);
+						System.out.println("Client Message:" + msg);
 						// 返回消息给客户端。
-						out.println("OK ！");
+						out.println("OK!");
 						out.flush();
 
 					}

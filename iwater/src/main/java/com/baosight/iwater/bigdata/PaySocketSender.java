@@ -8,58 +8,65 @@ import java.util.Random;
 public class PaySocketSender {
 
 	public static void main(String args[]) {
-		
+
 		for (int i = 1; i <= 100; i++) {
-			String RTU_CODE = "B"+i;
-			String data = "water info";
-			int offset = i;
+			String RTU_CODE = "B" + i;
+			
 			new Thread(new Runnable() {
 
 				@Override
 				public void run() {
-					try {						
+					Socket socket = null;
+					BufferedReader in = null;
+					PrintWriter out = null;
+					
+					try {
+						InetAddress addr = InetAddress.getByName("localhost");
+						socket = new Socket(addr, 5203);
+						int count = 0;
+
 						while (true) {
-							exSocket(RTU_CODE,data,offset);
+							Thread.sleep(new Random().nextInt(5000));
+							in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+							out = new PrintWriter(socket.getOutputStream());						
+
+							// 将字符串输出到Server
+							String message = getMessage(RTU_CODE,count);
+							out.println(message);
+							// 刷新输出流，使Server马上收到该字符串
+							out.flush();
+							System.out.println("Client:" + message);
+							System.out.println("Server:" + in.readLine());
+
+							count++;
+							if (count >= 10) {
+								break;
+							}
 						}
 					} catch (Exception e) {
 						e.printStackTrace();
 						System.out.println("Error:" + e);
-					} finally {		
-
+					} finally {
+						try {
+							in.close();
+							out.close();
+							socket.close();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} // 关闭Socket
 					}
 
 				}
 			}).start();
 		}
 	}
-
-	public static void exSocket(String rtuCode, String data,int offset) {
-		try {
-			InetAddress addr = InetAddress.getByName("localhost");
-			Socket socket = new Socket(addr, 5203);
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					socket.getInputStream()));
-			PrintWriter out = new PrintWriter(socket.getOutputStream());
-			for (int i = 0; i < 1000000; i++) {
-				String readline = rtuCode +" "+ data;
-				; // sin.readLine(); //从系统标准输入读入一字符串
-				// 将从系统标准输入读入的字符串输出到Server
-				Thread.sleep(new Random().nextInt(10000));
-				out.println(readline);
-				// 刷新输出流，使Server马上收到该字符串
-				out.flush();
-				System.out.println("Client:" + readline);
-
-				System.out.println("Servlet :" + in.readLine());
-			}
-			socket.close(); // 关闭Socket
-
-		} catch (Exception e) {
-
-			System.out.println("Error" + e); // 出错，则打印出错信息
-
-		}
-
+	
+	public static String getMessage(String RTU_CODE, int count){	
+		String data = "waterinfo";
+		String message = RTU_CODE + "_" + data + "_" + count;
+		return message;
 	}
+
 
 }

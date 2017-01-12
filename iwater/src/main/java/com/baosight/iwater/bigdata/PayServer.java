@@ -10,11 +10,19 @@ import java.net.Socket;
 public class PayServer {
 
 	public static void main(String[] args) throws IOException {
-		ServerSocket server = new ServerSocket(5203);
-		while (true) {
-			Socket socket = server.accept();
-			System.out.println("Start...");
-			exSocketServer(socket);			
+		ServerSocket server = null;
+		try {
+			server = new ServerSocket(5203);
+			while (true) {
+				Socket socket = server.accept();
+				System.out.println("Start...");
+				exSocketServer(socket);			
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			server.close();
 		}
 	}
 

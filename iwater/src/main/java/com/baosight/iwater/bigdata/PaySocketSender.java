@@ -5,6 +5,8 @@ import java.io.*;
 import java.net.*;
 import java.util.Random;
 
+import com.baosight.iwater.bigdata.userdata.YuliangData;
+
 public class PaySocketSender {
 
 	public static void main(String args[]) {
@@ -31,7 +33,7 @@ public class PaySocketSender {
 							out = new PrintWriter(socket.getOutputStream());						
 
 							// 将字符串输出到Server
-							String message = getMessage(RTU_CODE,count);
+							String message = getMessage(RTU_CODE);
 							out.println(message);
 							// 刷新输出流，使Server马上收到该字符串
 							out.flush();
@@ -62,10 +64,9 @@ public class PaySocketSender {
 		}
 	}
 	
-	public static String getMessage(String RTU_CODE, int count){	
-		String data = "68H 68H";
-		String message = RTU_CODE + "_" + data + "_" + count;
-		return message;
+	public static String getMessage(String RTU_CODE) throws Exception{	
+		String msg = new WaterMessage(RTU_CODE,new YuliangData(20.2)).getMessage();
+		return msg;
 	}
 
 

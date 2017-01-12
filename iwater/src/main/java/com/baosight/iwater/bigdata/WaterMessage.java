@@ -1,14 +1,16 @@
 package com.baosight.iwater.bigdata;
 
-import org.springframework.util.StringUtils;
+import org.apache.log4j.Logger;
+
+import com.baosight.iwater.bigdata.userdata.ShuiweiData;
+import com.baosight.iwater.bigdata.userdata.YuliangData;
 
 public class WaterMessage {
+	private static Logger logger = Logger.getLogger(WaterMessage.class);
 	
 	private static String START_STR = "68";
 	
 	private String END_STR = "16";
-	
-	private String L = "10001100";
 	
 	private String DIR = "1"; //0下行，1上行
 	
@@ -16,17 +18,23 @@ public class WaterMessage {
 	
 	private String FCB = "01"; //帧计数位
 	
-	private int FN = 3; //功能码
+	private IUserData userData; //功能码
 	
-	private String rtuCode = "B1";
+	private String rtuCode;
 	
-	private String AFN = "C0";
+	
 	
 	private char[] alert = new char[16];
 	private char[] status = new char[16];
 	
 	
-	private String getMessage() throws Exception{
+	public WaterMessage(String rtuCode, IUserData userData) {
+		super();
+		this.rtuCode = rtuCode;
+		this.userData = userData;
+	}
+
+	public String getMessage() throws Exception{
 		StringBuffer message = new StringBuffer();
 		StringBuffer messageHeader = new StringBuffer();
 		StringBuffer messageBody = new StringBuffer();
@@ -34,13 +42,13 @@ public class WaterMessage {
 		messageBody.append(getControlC());
 		messageBody.append(getAddressA());
 		messageBody.append(getMessageData());
-		messageBody.append(getAlert());
-		messageBody.append(getStatus());
+		
 		
 		messageHeader.append(START_STR);
 		//用户数据区长度L，由D0～D7（1字节）组成，采用BIN编码，是控制域、地址域、用户数据域（应用层）的字节总数。
 		//数据为图片数据流时，数据长度为L*1K。采用无线数传信道，SMS的帧长字节数不大于140，北斗卫星通信的帧长字节数不大于98。
-		String L = getFixLengthString(Integer.toBinaryString(messageBody.length()),8);
+		String L = StringUtils.getFixLengthString(Integer.toBinaryString(messageBody.length()),8);
+		logger.info("用户数据区长度L:"+L);
 		messageHeader.append(L);
 		messageHeader.append(START_STR);
 		
@@ -51,7 +59,9 @@ public class WaterMessage {
 		message.append(CS);
 		message.append(END_STR);
 		
-		return message.toString();
+		String messageStr = message.toString();
+		logger.info("报文为:"+messageStr);
+		return messageStr;
 	}
 	
 	private String getAlert(){
@@ -67,7 +77,16 @@ public class WaterMessage {
 	}
 	
 	private String getMessageData() throws Exception{
-		return "100000001111110001";
+		String userData = this.userData.getData();
+		logger.info("用户数据区UserData:"+userData);
+		
+		String alert = getAlert();
+		String status = getStatus();
+		logger.info("报警值:"+alert);
+		logger.info("状态值:"+status);
+		
+		String messageData = userData+alert+status;
+		return messageData;
 	}
 	
 	/**
@@ -77,8 +96,10 @@ public class WaterMessage {
 	 * @throws Exception 
 	 */
 	private String getControlC() throws Exception{
-		String FN_BIN = getFixLengthString(Integer.toBinaryString(FN),4);
-		return DIR+DIV+FCB+FN_BIN;
+		String FN_BIN = StringUtils.getFixLengthString(Integer.toBinaryString(userData.getCFNCode()),4);
+		String CStr = DIR+DIV+FCB+FN_BIN;
+		logger.info("控制域C:"+CStr);
+		return CStr;
 	}
 	
 	
@@ -107,32 +128,23 @@ public class WaterMessage {
 	private String getAddressA() throws Exception{
 		String waterCode = "00000000";
 		String hexCode = CHexConverter.str2HexStr(rtuCode).trim();//去除空格
-		String fixHexCode = getFixLengthString(hexCode,8);
+		logger.info("rtuCode:"+rtuCode+",hexCode:"+hexCode);
+		String fixHexCode = StringUtils.getFixLengthString(hexCode,8);
 		String stationCode = "";
 		for(int i=0;i<8;i++){
-			int c = Integer.parseInt(String.valueOf(fixHexCode.charAt(i)));
-			String bc = Integer.toBinaryString(c);
-			stationCode += getFixLengthString(bc,4);
+			stationCode += StringUtils.getPosFixLengthString(fixHexCode,i,4);
 		}
-		return waterCode+stationCode;
+		String AStr = waterCode+stationCode;
+		logger.info("地址域A:"+AStr);
+		return AStr;
 	}
 	
-	private String getFixLengthString(String inStr,int fixLength) throws Exception{
-		String outStr = inStr;
-		int length = inStr.length();
-		if(length>fixLength){
-			throw new Exception("输入字符串超出指定的长度！字符串为："+inStr);
-		}
-		
-		for(int i=0;i<fixLength-length;i++){
-			outStr = "0" + outStr;
-		}
-		return outStr;
-	}
+
 	
 	public static void main(String args[]) {
 		try {
-			System.out.println(new WaterMessage().getMessage());
+			new WaterMessage("B1",new YuliangData(20.2)).getMessage();
+			new WaterMessage("B2",new ShuiweiData(-20.2)).getMessage();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

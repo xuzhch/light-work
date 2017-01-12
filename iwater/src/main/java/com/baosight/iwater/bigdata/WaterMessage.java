@@ -4,9 +4,9 @@ import org.springframework.util.StringUtils;
 
 public class WaterMessage {
 	
-	private static String START_STR = "68H";
+	private static String START_STR = "68";
 	
-	private String END_STR = "16H";
+	private String END_STR = "16";
 	
 	private String L = "10001100";
 	
@@ -20,7 +20,11 @@ public class WaterMessage {
 	
 	private String rtuCode = "B1";
 	
-	private String AFN = "C0H";
+	private String AFN = "C0";
+	
+	private char[] alert = new char[16];
+	private char[] status = new char[16];
+	
 	
 	private String getMessage() throws Exception{
 		StringBuffer message = new StringBuffer();
@@ -30,6 +34,8 @@ public class WaterMessage {
 		messageBody.append(getControlC());
 		messageBody.append(getAddressA());
 		messageBody.append(getMessageData());
+		messageBody.append(getAlert());
+		messageBody.append(getStatus());
 		
 		messageHeader.append(START_STR);
 		//用户数据区长度L，由D0～D7（1字节）组成，采用BIN编码，是控制域、地址域、用户数据域（应用层）的字节总数。
@@ -46,6 +52,14 @@ public class WaterMessage {
 		message.append(END_STR);
 		
 		return message.toString();
+	}
+	
+	private String getAlert(){
+		return "0000000000000000";
+	}
+	
+	private String getStatus(){
+		return "0000000000000000";
 	}
 	
 	private String getCRC(String messageBody){
@@ -118,7 +132,6 @@ public class WaterMessage {
 	
 	public static void main(String args[]) {
 		try {
-			System.out.println(Integer.toBinaryString(2));
 			System.out.println(new WaterMessage().getMessage());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

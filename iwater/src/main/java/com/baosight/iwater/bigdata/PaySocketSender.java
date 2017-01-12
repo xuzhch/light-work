@@ -63,7 +63,7 @@ public class PaySocketSender {
 	}
 	
 	public static String getMessage(String RTU_CODE, int count){	
-		String data = "waterinfo";
+		String data = "68H 68H";
 		String message = RTU_CODE + "_" + data + "_" + count;
 		return message;
 	}

@@ -14,19 +14,13 @@ public class WaterMessage {
 	
 	private String DIR = "1"; //0下行，1上行
 	
-	private String DIV = "1"; //0单帧，1多个帧
+	private String DIV = "0"; //0单帧，1多个帧
 	
 	private String FCB = "01"; //帧计数位
 	
-	private IUserData userData; //功能码
+	private IUserData userData; //用户数据
 	
 	private String rtuCode;
-	
-	
-	
-	private char[] alert = new char[16];
-	private char[] status = new char[16];
-	
 	
 	public WaterMessage(String rtuCode, IUserData userData) {
 		super();

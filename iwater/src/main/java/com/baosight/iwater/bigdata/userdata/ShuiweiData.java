@@ -2,6 +2,8 @@ package com.baosight.iwater.bigdata.userdata;
 
 import java.text.DecimalFormat;
 
+import org.apache.log4j.Logger;
+
 import com.baosight.iwater.bigdata.StringUtils;
 
 /**
@@ -12,6 +14,7 @@ import com.baosight.iwater.bigdata.StringUtils;
  * @date 2017年1月12日下午5:09:04
  */
 public class ShuiweiData extends AbstractSelfReportData {
+	private static Logger logger = Logger.getLogger(ShuiweiData.class);
 	
 	public static final int CFN_CODE = 2;
 	private DecimalFormat df = new DecimalFormat("######0.000");   	
@@ -25,6 +28,7 @@ public class ShuiweiData extends AbstractSelfReportData {
 	@Override
 	public int getCFNCode() {
 		// TODO Auto-generated method stub
+		logger.info("生成水位消息数据！");
 		return CFN_CODE;
 	}
 
@@ -44,7 +48,10 @@ public class ShuiweiData extends AbstractSelfReportData {
 			mstr = "1111";
 		}
 		String byte4 = mstr+ StringUtils.getPosFixLengthString(str,0,4);	
-		return AFN_CODE+byte1+byte2+byte3+byte4;
+		
+		String data = byte1+byte2+byte3+byte4;
+		logger.info("水位数值："+value+",报文值："+data);
+		return AFN_CODE+data;
 	}
 	
 	public static void main(String args[]) {

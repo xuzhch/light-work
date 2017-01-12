@@ -2,6 +2,8 @@ package com.baosight.iwater.bigdata.userdata;
 
 import java.text.DecimalFormat;
 
+import org.apache.log4j.Logger;
+
 import com.baosight.iwater.bigdata.StringUtils;
 
 /**
@@ -13,6 +15,7 @@ import com.baosight.iwater.bigdata.StringUtils;
  * @date 2017年1月12日下午5:09:04
  */
 public class YuliangData extends AbstractSelfReportData {
+	private static Logger logger = Logger.getLogger(YuliangData.class);
 	
 	public static final int CFN_CODE = 1;
 	
@@ -26,22 +29,24 @@ public class YuliangData extends AbstractSelfReportData {
 
 	@Override
 	public int getCFNCode() {
-		// TODO Auto-generated method stub
+		logger.info("生成雨量消息数据！");
 		return CFN_CODE;
 	}
 
 	@Override
 	public String getData() throws Exception {
-		if(Double.compare(value, 99999.9)>0){
-			throw new Exception("数值超出上限值99999.9!");
+		if(Double.compare(value, 99999.9)>0||Double.compare(value, 0)<0){
+			throw new Exception("雨量数值超出上限值99999.9或雨量数值不能小于0!");
 		}
 		
 		String formatStr = df.format(this.value);	
 		String str = StringUtils.getFixLengthString(formatStr, 7);
 		String byte1 = StringUtils.getPosFixLengthString(str,4,4)+ StringUtils.getPosFixLengthString(str,6,4);
 		String byte2 = StringUtils.getPosFixLengthString(str,2,4)+ StringUtils.getPosFixLengthString(str,3,4);
-		String byte3 = StringUtils.getPosFixLengthString(str,0,4)+ StringUtils.getPosFixLengthString(str,1,4);		
-		return AFN_CODE+byte1+byte2+byte3;
+		String byte3 = StringUtils.getPosFixLengthString(str,0,4)+ StringUtils.getPosFixLengthString(str,1,4);	
+		String data = byte1+byte2+byte3;
+		logger.info("雨量数值："+value+",报文值："+data);
+		return AFN_CODE+data;
 	}
 	
 	public static void main(String args[]) {

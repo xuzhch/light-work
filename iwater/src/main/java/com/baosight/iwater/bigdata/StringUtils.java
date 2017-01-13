@@ -19,7 +19,7 @@ public class StringUtils {
 		return outStr;
 	}
 	
-	public static String getPosFixLengthString(String inStr,int pos, int fixLength) throws Exception{
+	public static String getPosHexString(String inStr,int pos, int fixLength) throws Exception{
 		int c = Integer.parseInt(String.valueOf(inStr.charAt(pos)));
 		String bc = Integer.toHexString(c);
 		bc = StringUtils.getFixLengthString(bc,fixLength);

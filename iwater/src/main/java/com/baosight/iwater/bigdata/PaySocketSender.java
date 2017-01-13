@@ -10,9 +10,11 @@ import com.baosight.iwater.bigdata.userdata.YuliangData;
 public class PaySocketSender {
 
 	public static void main(String args[]) {
+		int RTU_NUM = 1;
+		int SEND_NUM = 1;
 
-		for (int i = 1; i <= 100; i++) {
-			String RTU_CODE = "B" + i;
+		for (int i = 1; i <= RTU_NUM; i++) {
+			String RTU_CODE = ""+i;
 			
 			new Thread(new Runnable() {
 
@@ -23,8 +25,8 @@ public class PaySocketSender {
 					PrintWriter out = null;
 					
 					try {
-						InetAddress addr = InetAddress.getByName("localhost");
-						socket = new Socket(addr, 5203);
+						InetAddress addr = InetAddress.getByName("112.64.186.70");
+						socket = new Socket(addr, 4567);
 						int count = 0;
 
 						while (true) {
@@ -38,10 +40,10 @@ public class PaySocketSender {
 							// 刷新输出流，使Server马上收到该字符串
 							out.flush();
 							System.out.println("Client:" + message);
-							System.out.println("Server:" + in.readLine());
+							//System.out.println("Server:" + in.readLine());
 
 							count++;
-							if (count >= 10) {
+							if (count >= SEND_NUM) {
 								break;
 							}
 						}

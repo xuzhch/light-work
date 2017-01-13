@@ -155,11 +155,8 @@ public class WaterMessage {
 
 	public static void main(String args[]) {
 		try {
-			//String aa = "91 00 00 00 00 64 C0 00 02 00 02 00 00 00 00 00 00";
-			String aa = "b3 01 02 03 04 56 c0 aa aa aa aa aa aa aa aa aa aa 20 00 70 00 11 00 15 06 05";
-			String[] chars = aa.split("[ ]");
-			String hexCode = WaterMessage.GetCheckCRC8(chars,chars.length);
-			//System.out.println(hexCode);
+			String rtu = "B12";
+			System.out.println(CHexConverter.str2HexStr(rtu));
 
 			new WaterMessage("100", new YuliangData(20.2)).getMessage();
 			//new WaterMessage("B2", new ShuiweiData(-20.2)).getMessage();

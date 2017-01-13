@@ -39,7 +39,7 @@ public class PaySocketSender {
 							out.println(message);
 							// 刷新输出流，使Server马上收到该字符串
 							out.flush();
-							System.out.println("Client:" + message);
+							System.out.println("RTU发送数据:" + message);
 							//System.out.println("Server:" + in.readLine());
 
 							count++;
@@ -67,7 +67,7 @@ public class PaySocketSender {
 	}
 	
 	public static String getMessage(String RTU_CODE) throws Exception{	
-		String msg = new WaterMessage(RTU_CODE,new YuliangData(20.2)).getMessage();
+		String msg = new WaterMessage(RTU_CODE,new YuliangData(12345.6)).getMessage();
 		return msg;
 	}
 

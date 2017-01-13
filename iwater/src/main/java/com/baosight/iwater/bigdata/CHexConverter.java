@@ -43,7 +43,7 @@ public class CHexConverter
         for (int i = 0; i < bs.length; i++){    
             sb.append(mChars[(bs[i] & 0xFF) >> 4]);    
             sb.append(mChars[bs[i] & 0x0F]);  
-            //sb.append('');  
+            sb.append(' ');  
         }    
         return sb.toString().trim();    
     }  

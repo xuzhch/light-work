@@ -34,23 +34,25 @@ public class WaterMessage {
 		StringBuffer messageBody = new StringBuffer();
 
 		messageBody.append(getControlC());
-		messageBody.append(getAddressA());
-		messageBody.append(getMessageData());
+		messageBody.append(" "+getAddressA());
+		messageBody.append(" "+getMessageData());
+		String messageBodyStr = messageBody.toString();
+		logger.info("用户数据区:" + messageBodyStr);
 
 		messageHeader.append(START_STR);
 		// 用户数据区长度L，由D0～D7（1字节）组成，采用BIN编码，是控制域、地址域、用户数据域（应用层）的字节总数。
 		// 数据为图片数据流时，数据长度为L*1K。采用无线数传信道，SMS的帧长字节数不大于140，北斗卫星通信的帧长字节数不大于98。
-		String L = StringUtils.getFixLengthString(Integer.toBinaryString(messageBody.toString().getBytes().length), 8);
+		String L = Integer.toHexString(messageBodyStr.split("[ ]").length);
 		logger.info("用户数据区长度L:" + L);
-		messageHeader.append(L);
-		messageHeader.append(START_STR);
+		messageHeader.append(" "+L);
+		messageHeader.append(" "+START_STR);
 
-		String CS = getCRC(messageBody.toString());
+		String CS = getCRC(messageBodyStr);
 
-		message.append(messageHeader);
-		message.append(messageBody);
-		message.append(CS);
-		message.append(END_STR);
+		message.append(" "+messageHeader);
+		message.append(" "+messageBody);
+		message.append(" "+CS);
+		message.append(" "+END_STR);
 
 		String messageStr = message.toString();
 		logger.info("报文为:" + messageStr);
@@ -58,27 +60,30 @@ public class WaterMessage {
 	}
 
 	private String getAlert() {
-		return "0000000000000000";
+		return "00 00";
 	}
 
 	private String getStatus() {
-		return "0000000000000000";
+		return "00 00";
 	}
 
 	private String getCRC(String messageBody) {
-		return "1000001";
+		String[] chars = messageBody.split("[ ]");
+		String hexCode = WaterMessage.GetCheckCRC8(chars,chars.length);
+		logger.info("CS检验值为:" + hexCode);
+		return hexCode;
 	}
 
 	private String getMessageData() throws Exception {
 		String userData = this.userData.getData();
-		logger.info("用户数据区UserData:" + userData);
+		logger.info("用户数据域:" + userData);
 
 		String alert = getAlert();
 		String status = getStatus();
 		logger.info("报警值:" + alert);
 		logger.info("状态值:" + status);
 
-		String messageData = userData + alert + status;
+		String messageData = userData +" "+ alert + " "+status;
 		return messageData;
 	}
 
@@ -91,8 +96,9 @@ public class WaterMessage {
 	private String getControlC() throws Exception {
 		String FN_BIN = StringUtils.getFixLengthString(Integer.toBinaryString(userData.getCFNCode()), 4);
 		String CStr = DIR + DIV + FCB + FN_BIN;
-		logger.info("控制域C:" + CStr);
-		return CStr;
+		String hexStr = Integer.toHexString(Integer.valueOf(CStr,2));
+		logger.info("控制域C:" + hexStr);
+		return hexStr;
 	}
 
 	/**
@@ -105,15 +111,13 @@ public class WaterMessage {
 	 * @throws Exception
 	 */
 	private String getAddressA() throws Exception {
-		String waterCode = "00000000";
-		String hexCode = CHexConverter.str2HexStr(rtuCode).trim();// 去除空格
+		String waterCode = "00 00 00";
+		String hexCode = Integer.toHexString(Integer.valueOf(rtuCode));
+		hexCode = StringUtils.getFixLengthString(hexCode, 4);
+        char[] codeChars = {hexCode.charAt(0),hexCode.charAt(1),' ',hexCode.charAt(2),hexCode.charAt(3)};
+        hexCode = String.valueOf(codeChars);
 		logger.info("rtuCode:" + rtuCode + ",hexCode:" + hexCode);
-		String fixHexCode = StringUtils.getFixLengthString(hexCode, 8);
-		String stationCode = "";
-		for (int i = 0; i < 8; i++) {
-			stationCode += StringUtils.getPosFixLengthString(fixHexCode, i, 4);
-		}
-		String AStr = waterCode + stationCode;
+		String AStr = waterCode +" "+hexCode;
 		logger.info("地址域A:" + AStr);
 		return AStr;
 	}
@@ -124,10 +128,16 @@ public class WaterMessage {
 	 * @param count
 	 * @return
 	 */
-	public static char GetCheckCRC8(char[] abyte, int count) {
-		char crc = 0;
+	public static String GetCheckCRC8(String[] strArray, int count) {
+		byte[] abyte = new byte[count];
+		for(int i=0;i<count;i++){
+			int val = Integer.parseInt(strArray[i],16);
+			abyte[i] = (byte)val; //将16进制字符转为10进制整数，然后强制转换成byte
+		}
+		
+		byte crc = 0;
 		int i, j;
-
+		//java位运算
 		for (i = 0; i < count; i++) {
 			crc ^= abyte[i];
 			for (j = 0; j < 8; j++) {
@@ -139,17 +149,17 @@ public class WaterMessage {
 				}
 			}
 		}
-		return crc;
+		return Integer.toHexString(Math.abs(crc));
 	}
 
 	public static void main(String args[]) {
 		try {
 			String aa = "b3 01 02 03 04 56 c0 aa aa aa aa aa aa aa aa aa aa 20 00 70 00 11 00 15 06 05 ";
-			char crc = WaterMessage.GetCheckCRC8(aa.toCharArray(),aa.length());
-			String hexCode = CHexConverter.str2HexStr(String.valueOf(crc));
+			String[] chars = aa.split("[ ]");
+			String hexCode = WaterMessage.GetCheckCRC8(chars,chars.length);
 			System.out.println(hexCode);
-			byte[] bt = "C0000000100000001000000000".getBytes();
-			//new WaterMessage("B1", new YuliangData(20.2)).getMessage();
+
+			new WaterMessage("100", new YuliangData(20.2)).getMessage();
 			//new WaterMessage("B2", new ShuiweiData(-20.2)).getMessage();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

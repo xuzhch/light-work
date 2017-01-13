@@ -21,8 +21,8 @@ public class StringUtils {
 	
 	public static String getPosFixLengthString(String inStr,int pos, int fixLength) throws Exception{
 		int c = Integer.parseInt(String.valueOf(inStr.charAt(pos)));
-		String bc = Integer.toBinaryString(c);
-		bc = StringUtils.getFixLengthString(bc,4);
+		String bc = Integer.toHexString(c);
+		bc = StringUtils.getFixLengthString(bc,fixLength);
 		return bc;
 	}
 	

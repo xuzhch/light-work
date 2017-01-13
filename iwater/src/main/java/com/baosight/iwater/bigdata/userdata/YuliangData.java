@@ -41,12 +41,12 @@ public class YuliangData extends AbstractSelfReportData {
 		
 		String formatStr = df.format(this.value);	
 		String str = StringUtils.getFixLengthString(formatStr, 7);
-		String byte1 = StringUtils.getPosFixLengthString(str,4,4)+ StringUtils.getPosFixLengthString(str,6,4);
-		String byte2 = StringUtils.getPosFixLengthString(str,2,4)+ StringUtils.getPosFixLengthString(str,3,4);
-		String byte3 = StringUtils.getPosFixLengthString(str,0,4)+ StringUtils.getPosFixLengthString(str,1,4);	
-		String data = byte1+byte2+byte3;
+		String byte1 = StringUtils.getPosFixLengthString(str,4,2)+ " "+StringUtils.getPosFixLengthString(str,6,2);
+		String byte2 = StringUtils.getPosFixLengthString(str,2,2)+ " "+StringUtils.getPosFixLengthString(str,3,2);
+		String byte3 = StringUtils.getPosFixLengthString(str,0,2)+ " "+StringUtils.getPosFixLengthString(str,1,2);	
+		String data = byte1+" "+byte2+" "+byte3;
 		logger.info("雨量数值："+value+",报文值："+data);
-		return AFN_CODE+data;
+		return AFN_CODE+" "+data;
 	}
 	
 	public static void main(String args[]) {

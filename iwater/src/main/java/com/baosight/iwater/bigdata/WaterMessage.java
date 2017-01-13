@@ -54,7 +54,7 @@ public class WaterMessage {
 		message.append(" "+CS);
 		message.append(" "+END_STR);
 
-		String messageStr = message.toString();
+		String messageStr = message.toString().toUpperCase();
 		logger.info("报文为:" + messageStr);
 		return messageStr;
 	}
@@ -131,13 +131,13 @@ public class WaterMessage {
 	public static String GetCheckCRC8(String[] strArray, int count) {
 		byte[] abyte = new byte[count];
 		for(int i=0;i<count;i++){
-			int val = Integer.parseInt(strArray[i],16);
-			abyte[i] = (byte)val; //将16进制字符转为10进制整数，然后强制转换成byte
+			int val = Math.abs(Integer.parseInt(strArray[i],16));	
+			byte bt = (byte)val; //将16进制字符转为10进制整数，然后强制转换成byte
+			abyte[i] = bt;
 		}
 		
 		byte crc = 0;
 		int i, j;
-		//java位运算
 		for (i = 0; i < count; i++) {
 			crc ^= abyte[i];
 			for (j = 0; j < 8; j++) {
@@ -149,15 +149,17 @@ public class WaterMessage {
 				}
 			}
 		}
-		return Integer.toHexString(Math.abs(crc));
+		int unsignedByte = crc >=0 ? crc : crc + 256;  //有符号的byte转成无符号的byte
+		return Integer.toHexString(unsignedByte);
 	}
 
 	public static void main(String args[]) {
 		try {
-			String aa = "b3 01 02 03 04 56 c0 aa aa aa aa aa aa aa aa aa aa 20 00 70 00 11 00 15 06 05 ";
+			//String aa = "91 00 00 00 00 64 C0 00 02 00 02 00 00 00 00 00 00";
+			String aa = "b3 01 02 03 04 56 c0 aa aa aa aa aa aa aa aa aa aa 20 00 70 00 11 00 15 06 05";
 			String[] chars = aa.split("[ ]");
 			String hexCode = WaterMessage.GetCheckCRC8(chars,chars.length);
-			System.out.println(hexCode);
+			//System.out.println(hexCode);
 
 			new WaterMessage("100", new YuliangData(20.2)).getMessage();
 			//new WaterMessage("B2", new ShuiweiData(-20.2)).getMessage();

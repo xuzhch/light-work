@@ -1,13 +1,14 @@
 package com.baosight.iwater.bigdata.simulation.environment;
 
-public class Sluice {
-	private String name;
-	private String liuliang;
+import com.baosight.iwater.bigdata.simulation.IEnvironment;
 
-	public Sluice(String name, String liuliang) {
+public class Sluice  implements IEnvironment{
+	private String name;
+	private double liuliang;
+
+	public Sluice(String name) {
 		super();
 		this.name = name;
-		this.liuliang = liuliang;
 	}
 
 	public String getName() {
@@ -18,11 +19,17 @@ public class Sluice {
 		this.name = name;
 	}
 
-	public String getLiuliang() {
+	public double getLiuliang() {
 		return liuliang;
 	}
 
-	public void setLiuliang(String liuliang) {
+	public void setLiuliang(double liuliang) {
 		this.liuliang = liuliang;
+	}
+
+	@Override
+	public double getStatus() {
+		// TODO Auto-generated method stub
+		return this.liuliang;
 	}
 }

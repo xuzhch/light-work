@@ -24,8 +24,8 @@ public class Area {
 		this.river = river;
 	}
 	
-	public Double getData(String key){
-		return (double) 0;
+	public double getData(String key){
+		return 0;
 	}
 
 	public Sky getSky() {

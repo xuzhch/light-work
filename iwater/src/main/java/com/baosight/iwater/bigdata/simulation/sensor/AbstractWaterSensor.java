@@ -1,20 +1,20 @@
 package com.baosight.iwater.bigdata.simulation.sensor;
 
+import com.baosight.iwater.bigdata.simulation.IEnvironment;
 import com.baosight.iwater.bigdata.simulation.ISensor;
-import com.baosight.iwater.bigdata.simulation.environment.Area;
 
 public abstract class AbstractWaterSensor implements ISensor{
-	private Area area;
+	private IEnvironment env;
 
-	public AbstractWaterSensor(Area area) {
+	public AbstractWaterSensor(IEnvironment env) {
 		super();
-		this.area = area;
+		this.env = env;
 	}
 
 	@Override
-	public Area getArea() {
+	public IEnvironment getEnvironment() {
 		// TODO Auto-generated method stub
-		return this.area;
+		return this.env;
 	}
 
 }

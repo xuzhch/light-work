@@ -10,12 +10,16 @@ public interface RTU {
 	
 	public List<ISensor> getSensors();
 	
-	public void send();
+	public void start() throws Exception ;
+	
+	public void stop() throws Exception ;
 	
 	public List<IUserData> collectData();
 	
 	public String getHost();
 	
 	public int getPort();
+	
+	public void addSensor(ISensor sensor);
 
 }

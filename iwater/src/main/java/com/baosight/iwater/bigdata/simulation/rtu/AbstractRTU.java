@@ -7,34 +7,20 @@ import com.baosight.iwater.bigdata.IUserData;
 import com.baosight.iwater.bigdata.simulation.ISensor;
 import com.baosight.iwater.bigdata.simulation.RTU;
 
-public class WaterRTU implements RTU{
+public abstract class AbstractRTU implements RTU{
+
 	private List<ISensor> sensors = new ArrayList<ISensor>();
-	
-	private String RTUCode;
+	protected String RTUCode;
+	protected String host;
+	protected int port;
 
-	private String host;
-	
-	private int port;
-	
-	
-	public WaterRTU(String rTUCode, String host, int port) {
+	public AbstractRTU() {
 		super();
-		RTUCode = rTUCode;
-		this.host = host;
-		this.port = port;
 	}
-
 
 	@Override
 	public List<ISensor> getSensors() {
-		// TODO Auto-generated method stub
 		return sensors;
-	}
-
-	@Override
-	public void send() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -65,21 +51,21 @@ public class WaterRTU implements RTU{
 		return this.RTUCode;
 	}
 
+	public void addSensor(ISensor sensor) {
+		this.sensors.add(sensor);
+	}
 
 	public void setSensors(List<ISensor> sensors) {
 		this.sensors = sensors;
 	}
 
-
 	public void setRTUCode(String rTUCode) {
 		RTUCode = rTUCode;
 	}
 
-
 	public void setHost(String host) {
 		this.host = host;
 	}
-
 
 	public void setPort(int port) {
 		this.port = port;

@@ -26,7 +26,7 @@ public class PaySocketSender {
 					
 					try {
 						InetAddress addr = InetAddress.getByName("112.64.186.70");
-						socket = new Socket(addr, 4567);
+						socket = new Socket(addr, 5191);
 						int count = 0;
 
 						while (true) {

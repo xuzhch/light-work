@@ -18,11 +18,9 @@ public class ShuiweiData extends AbstractSelfReportData {
 	
 	public static final int CFN_CODE = 2;
 	private DecimalFormat df = new DecimalFormat("######0.000");   	
-	private double value;
 
 	public ShuiweiData(double value) {
-		super();
-		this.value = value;
+		super(value);
 	}
 
 	@Override
@@ -34,8 +32,8 @@ public class ShuiweiData extends AbstractSelfReportData {
 
 	@Override
 	public String getData() throws Exception {		
-		if(Double.compare(value, 99999.9)>0||Double.compare(value, -99999.9)<0){
-			throw new Exception("数值超出上限值99999.9或超出下限值-99999.9!");
+		if(Double.compare(value, 9999.999)>0||Double.compare(value, -9999.999)<0){
+			throw new Exception("数值超出上限值9999.999或超出下限值-9999.999!");
 		}
 		boolean isMinus = Double.compare(value, 0)<0?true:false;
 		String formatStr = df.format(Math.abs(this.value));		
@@ -51,7 +49,7 @@ public class ShuiweiData extends AbstractSelfReportData {
 		
 		String data = byte1+" "+byte2+" "+byte3+" "+byte4;
 		logger.info("水位数值："+value+",报文值："+data);
-		return AFN_CODE+" "+data;
+		return this.getAFNCode()+" "+data;
 	}
 	
 	public static void main(String args[]) {

@@ -19,12 +19,10 @@ public class YuliangData extends AbstractSelfReportData {
 	
 	public static final int CFN_CODE = 1;
 	
-	private DecimalFormat df = new DecimalFormat("######0.0");   
-	private double value;
+	private DecimalFormat df = new DecimalFormat("######0.0");  
 
 	public YuliangData(double value) {
-		super();
-		this.value = value;
+		super(value);
 	}
 
 	@Override
@@ -46,7 +44,7 @@ public class YuliangData extends AbstractSelfReportData {
 		String byte3 = StringUtils.getPosHexString(str,0,2)+ " "+StringUtils.getPosHexString(str,1,2);	
 		String data = byte1+" "+byte2+" "+byte3;
 		logger.info("雨量数值："+value+",报文值："+data);
-		return AFN_CODE+" "+data;
+		return this.getAFNCode()+" "+data;
 	}
 	
 	public static void main(String args[]) {

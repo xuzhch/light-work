@@ -1,20 +1,21 @@
 package com.baosight.iwater.bigdata.simulation.environment;
 
-public class River {
-	private String name;
-	private String shuiwei;
+import com.baosight.iwater.bigdata.simulation.IEnvironment;
 
-	public River(String name, String shuiwei) {
+public class River implements IEnvironment{
+	private String name;
+	private double shuiwei;
+
+	public River(String name) {
 		super();
 		this.name = name;
-		this.shuiwei = shuiwei;
 	}
 
-	public String getShuiwei() {
+	public double getShuiwei() {
 		return shuiwei;
 	}
 
-	public void setShuiwei(String shuiwei) {
+	public void setShuiwei(double shuiwei) {
 		this.shuiwei = shuiwei;
 	}
 
@@ -24,6 +25,11 @@ public class River {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public double getStatus() {
+		return this.shuiwei;
 	}
 
 }

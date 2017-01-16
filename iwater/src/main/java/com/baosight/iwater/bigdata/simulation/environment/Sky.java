@@ -1,13 +1,14 @@
 package com.baosight.iwater.bigdata.simulation.environment;
 
-public class Sky {
-	private String name;
-	private String yuliang;
+import com.baosight.iwater.bigdata.simulation.IEnvironment;
 
-	public Sky(String name, String yuliang) {
+public class Sky  implements IEnvironment{
+	private String name;
+	private double yuliang;
+
+	public Sky(String name) {
 		super();
 		this.name = name;
-		this.yuliang = yuliang;
 	}
 
 	public String getName() {
@@ -18,11 +19,17 @@ public class Sky {
 		this.name = name;
 	}
 
-	public String getYuliang() {
+	public double getYuliang() {
 		return yuliang;
 	}
 
-	public void setYuliang(String yuliang) {
+	public void setYuliang(double yuliang) {
 		this.yuliang = yuliang;
+	}
+
+	@Override
+	public double getStatus() {
+		// TODO Auto-generated method stub
+		return this.yuliang;
 	}
 }

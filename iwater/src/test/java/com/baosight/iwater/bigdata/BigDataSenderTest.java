@@ -42,10 +42,10 @@ public class BigDataSenderTest {
 		LiuliangSensor llSensor = new LiuliangSensor(sluice);
 		RTU rtu = new SimpleRTU(rtuCode,host,port);
 		rtu.addSensor(ylSensor);
-		rtu.addSensor(swSensor);
-		rtu.addSensor(llSensor);
+		//rtu.addSensor(swSensor);
+		//rtu.addSensor(llSensor);
 		river.setShuiwei(9876.543);
-		sky.setYuliang(6543.2);
+		sky.setYuliang(563.8);
 		sluice.setLiuliang(999999.999);
 		return rtu;
 	}

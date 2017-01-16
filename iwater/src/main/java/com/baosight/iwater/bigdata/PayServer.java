@@ -12,7 +12,7 @@ public class PayServer {
 	public static void main(String[] args) throws IOException {
 		ServerSocket server = null;
 		try {
-			server = new ServerSocket(5203);
+			server = new ServerSocket(4567);
 			while (true) {
 				Socket socket = server.accept();
 				System.out.println("Start...");

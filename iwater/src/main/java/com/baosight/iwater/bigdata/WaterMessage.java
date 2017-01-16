@@ -42,7 +42,7 @@ public class WaterMessage {
 		messageHeader.append(START_STR);
 		// 用户数据区长度L，由D0～D7（1字节）组成，采用BIN编码，是控制域、地址域、用户数据域（应用层）的字节总数。
 		// 数据为图片数据流时，数据长度为L*1K。采用无线数传信道，SMS的帧长字节数不大于140，北斗卫星通信的帧长字节数不大于98。
-		String L = Integer.toHexString(messageBodyStr.split("[ ]").length);
+		String L = StringUtils.getFixLengthString(Integer.toHexString(messageBodyStr.split("[ ]").length),2);
 		logger.info("用户数据区长度L:" + L);
 		messageHeader.append(" "+L);
 		messageHeader.append(" "+START_STR);
@@ -67,9 +67,9 @@ public class WaterMessage {
 		return "00 00";
 	}
 
-	private String getCRC(String messageBody) {
+	private String getCRC(String messageBody) throws Exception {
 		String[] chars = messageBody.split("[ ]");
-		String hexCode = WaterMessage.GetCheckCRC8(chars,chars.length);
+		String hexCode = StringUtils.getFixLengthString(WaterMessage.GetCheckCRC8(chars,chars.length),2);
 		logger.info("CS检验值为:" + hexCode);
 		return hexCode;
 	}

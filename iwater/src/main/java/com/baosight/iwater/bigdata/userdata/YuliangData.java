@@ -39,9 +39,9 @@ public class YuliangData extends AbstractSelfReportData {
 		
 		String formatStr = df.format(this.value);	
 		String str = StringUtils.getFixLengthString(formatStr, 7);
-		String byte1 = StringUtils.getPosHexString(str,4,2)+ " "+StringUtils.getPosHexString(str,6,2);
-		String byte2 = StringUtils.getPosHexString(str,2,2)+ " "+StringUtils.getPosHexString(str,3,2);
-		String byte3 = StringUtils.getPosHexString(str,0,2)+ " "+StringUtils.getPosHexString(str,1,2);	
+		String byte1 = StringUtils.getPosHexString(str,4,1)+ StringUtils.getPosHexString(str,6,1);
+		String byte2 = StringUtils.getPosHexString(str,2,1)+ StringUtils.getPosHexString(str,3,1);
+		String byte3 = StringUtils.getPosHexString(str,0,1)+ StringUtils.getPosHexString(str,1,1);	
 		String data = byte1+" "+byte2+" "+byte3;
 		logger.info("雨量数值："+value+",报文值："+data);
 		return this.getAFNCode()+" "+data;

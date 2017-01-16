@@ -18,7 +18,7 @@ import com.baosight.iwater.bigdata.StringUtils;
 public class LiuliangData extends AbstractSelfReportData {
 	private static Logger logger = Logger.getLogger(LiuliangData.class);
 	
-	public static final int CFN_CODE = 2;
+	public static final int CFN_CODE = 3;
 	private DecimalFormat df = new DecimalFormat("######0.000");
 
 	public LiuliangData(double value) {
@@ -40,15 +40,15 @@ public class LiuliangData extends AbstractSelfReportData {
 		boolean isMinus = Double.compare(value, 0)<0?true:false;
 		String formatStr = df.format(Math.abs(this.value));		
 		String str = StringUtils.getFixLengthString(formatStr, 10);
-		String byte0 = StringUtils.getPosHexString(str,8,2)+" "+ StringUtils.getPosHexString(str,9,2);
-		String byte1 = StringUtils.getPosHexString(str,5,2)+" "+ StringUtils.getPosHexString(str,7,2);
-		String byte2 = StringUtils.getPosHexString(str,3,2)+" "+ StringUtils.getPosHexString(str,4,2);
-		String byte3 = StringUtils.getPosHexString(str,1,2)+" "+ StringUtils.getPosHexString(str,2,2);	
-		String mstr = "00";
+		String byte0 = StringUtils.getPosHexString(str,8,1)+" "+ StringUtils.getPosHexString(str,9,1);
+		String byte1 = StringUtils.getPosHexString(str,5,1)+" "+ StringUtils.getPosHexString(str,7,1);
+		String byte2 = StringUtils.getPosHexString(str,3,1)+" "+ StringUtils.getPosHexString(str,4,1);
+		String byte3 = StringUtils.getPosHexString(str,1,1)+" "+ StringUtils.getPosHexString(str,2,1);	
+		String mstr = "0";
 		if(isMinus){
-			mstr = "0F";
+			mstr = "F";
 		}
-		String byte4 = mstr+" "+ StringUtils.getPosHexString(str,0,2);	
+		String byte4 = mstr+" "+ StringUtils.getPosHexString(str,0,1);	
 		
 		String data = byte0+" "+byte1+" "+byte2+" "+byte3+" "+byte4;
 		logger.info("流量数值："+value+",报文值："+data);

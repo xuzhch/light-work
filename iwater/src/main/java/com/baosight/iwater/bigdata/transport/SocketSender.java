@@ -23,6 +23,11 @@ public class SocketSender {
 		super();
 		this.host = host;
 		this.port = port;
+		init();
+	}
+	
+	private void init(){
+		
 	}
 
 	public void send(WaterMessage message) throws Exception {

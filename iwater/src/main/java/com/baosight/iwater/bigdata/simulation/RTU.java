@@ -6,18 +6,16 @@ import com.baosight.iwater.bigdata.IUserData;
 
 public interface RTU {
 	
+	public String getRTUCode();
+	
 	public List<ISensor> getSensors();
 	
-	public void setSensors(List<ISensor> sensors);
+	public void send();
 	
-	public void setCollectInterval(long timeout);
+	public List<IUserData> collectData();
 	
-	public void setSendInterval(long timeout);
+	public String getHost();
 	
-	public void start();
-	
-	public List<IUserData> getDatas();
-	
-	public void setTarget(String host, int port);
+	public int getPort();
 
 }

@@ -1,6 +1,8 @@
 package com.baosight.iwater.bigdata.simulation.sensor;
 
+import com.baosight.iwater.bigdata.IUserData;
 import com.baosight.iwater.bigdata.simulation.environment.Area;
+import com.baosight.iwater.bigdata.userdata.YuliangData;
 
 public class LiuliangSensor extends AbstractWaterSensor{
 
@@ -10,8 +12,9 @@ public class LiuliangSensor extends AbstractWaterSensor{
 	}
 
 	@Override
-	public String getData() {
-		return this.getArea().getData(Area.LIU_LIANG);
+	public IUserData getData() {
+		Double value = this.getArea().getData(Area.LIU_LIANG);
+		return new YuliangData(value);
 	}
 
 

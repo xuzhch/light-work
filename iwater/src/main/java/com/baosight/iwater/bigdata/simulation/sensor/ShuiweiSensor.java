@@ -1,6 +1,8 @@
 package com.baosight.iwater.bigdata.simulation.sensor;
 
+import com.baosight.iwater.bigdata.IUserData;
 import com.baosight.iwater.bigdata.simulation.environment.Area;
+import com.baosight.iwater.bigdata.userdata.ShuiweiData;
 
 public class ShuiweiSensor extends AbstractWaterSensor{
 
@@ -10,9 +12,9 @@ public class ShuiweiSensor extends AbstractWaterSensor{
 	}
 
 	@Override
-	public String getData() {
-		// TODO Auto-generated method stub
-		return this.getArea().getData(Area.SHUI_WEI);
+	public IUserData getData() {
+		Double value = this.getArea().getData(Area.SHUI_WEI);
+		return new ShuiweiData(value);
 	}
 
 }

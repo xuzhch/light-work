@@ -49,34 +49,36 @@ public class TimingRTU extends AbstractRTU {
 				int count = 0;
 				
 				while (true) {
-					try {						
+					if (stopFlag) {
+						break;
+					}
+					try {							
 						List<IUserData> userDatas = collectData();
 						for (IUserData userData : userDatas) {
 							WaterMessage message = new WaterMessage(rtuCode, userData);
 							sender.send(message);
+							try {
+								sender.close();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 						}
 						count++;
-						logger.info("RTU:'" + rtuCode + "'线程运行中...,发送了"+count+"条数据。");
-						Thread.sleep(timeout);
-						if (stopFlag) {
-							break;
-						}
+						logger.info("RTU:'" + rtuCode + "',线程"+Thread.currentThread().getId()+"运行中...,间隔："+timeout+"毫秒,发送了"+count+"条数据。");
+						Thread.sleep(timeout);						
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
 				
 				//关闭sender
-				try {
-					sender.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+//				try {
+//					sender.close();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
 			}
 		}).start();
 
@@ -96,23 +98,37 @@ public class TimingRTU extends AbstractRTU {
 	}
 
 	public static void main(String args[]) {
-		RTU rtu = createTimingRTU("1", 10000, "112.64.186.70", 4567);
-		try {
-			rtu.start();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		String host = "192.168.2.102";
+//		int port = 8080;
+		int start = 1;
+		int rtu_num = 100;
+		long interval = 1*60*1000;
+		
+		String host = "112.64.186.70";
+		int port = 4567;
+		
+		for(int i=start;i<=rtu_num;i++){
+			RTU rtu = createTimingRTU(""+i, interval, host, port);
+			try {
+				rtu.start();
+				//Thread.sleep(5000);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}		
+		
 	}
 
 	public static RTU createTimingRTU(String rtuCode, long interval, String host, int port) {
 		River river = new River("xiaohe");
 		Sky sky = new Sky("baoshan");
 		Sluice sluice = new Sluice("xiaohezha");
-		YuliangSensor ylSensor = new YuliangSensor(sky);
+		TimingRTU rtu = new TimingRTU(rtuCode, host, port);
+		YuliangSensor ylSensor = new YuliangSensor(sky,rtu);
 		ShuiweiSensor swSensor = new ShuiweiSensor(river);
 		LiuliangSensor llSensor = new LiuliangSensor(sluice);
-		TimingRTU rtu = new TimingRTU(rtuCode, host, port);
+		
 		rtu.setCollectInterval(interval);
 		rtu.addSensor(ylSensor);
 		// rtu.addSensor(swSensor);

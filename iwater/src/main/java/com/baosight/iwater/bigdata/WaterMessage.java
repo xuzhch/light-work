@@ -37,13 +37,13 @@ public class WaterMessage {
 		messageBody.append(" "+getAddressA());
 		messageBody.append(" "+getMessageData());
 		String messageBodyStr = messageBody.toString();
-		logger.info("用户数据区:" + messageBodyStr);
+		logger.debug("用户数据区:" + messageBodyStr);
 
 		messageHeader.append(START_STR);
 		// 用户数据区长度L，由D0～D7（1字节）组成，采用BIN编码，是控制域、地址域、用户数据域（应用层）的字节总数。
 		// 数据为图片数据流时，数据长度为L*1K。采用无线数传信道，SMS的帧长字节数不大于140，北斗卫星通信的帧长字节数不大于98。
 		String L = StringUtils.getFixLengthString(Integer.toHexString(messageBodyStr.split("[ ]").length),2);
-		logger.info("用户数据区长度L:" + L);
+		logger.debug("用户数据区长度L:" + L);
 		messageHeader.append(" "+L);
 		messageHeader.append(" "+START_STR);
 
@@ -55,7 +55,7 @@ public class WaterMessage {
 		message.append(" "+END_STR);
 
 		String messageStr = message.toString().toUpperCase();
-		logger.info("报文为:" + messageStr);
+		logger.debug("报文为:" + messageStr);
 		return messageStr;
 	}
 
@@ -70,18 +70,18 @@ public class WaterMessage {
 	private String getCRC(String messageBody) throws Exception {
 		String[] chars = messageBody.split("[ ]");
 		String hexCode = StringUtils.getFixLengthString(WaterMessage.GetCheckCRC8(chars,chars.length),2);
-		logger.info("CS检验值为:" + hexCode);
+		logger.debug("CS检验值为:" + hexCode);
 		return hexCode;
 	}
 
 	private String getMessageData() throws Exception {
 		String userData = this.userData.getData();
-		logger.info("用户数据域:" + userData);
+		logger.debug("用户数据域:" + userData);
 
 		String alert = getAlert();
 		String status = getStatus();
-		logger.info("报警值:" + alert);
-		logger.info("状态值:" + status);
+		logger.debug("报警值:" + alert);
+		logger.debug("状态值:" + status);
 
 		String messageData = userData +" "+ alert + " "+status;
 		return messageData;
@@ -97,7 +97,7 @@ public class WaterMessage {
 		String FN_BIN = StringUtils.getFixLengthString(Integer.toBinaryString(userData.getCFNCode()), 4);
 		String CStr = DIR + DIV + FCB + FN_BIN;
 		String hexStr = Integer.toHexString(Integer.valueOf(CStr,2));
-		logger.info("控制域C:" + hexStr);
+		logger.debug("控制域C:" + hexStr);
 		return hexStr;
 	}
 
@@ -116,9 +116,9 @@ public class WaterMessage {
 		hexCode = StringUtils.getFixLengthString(hexCode, 4);
         char[] codeChars = {hexCode.charAt(0),hexCode.charAt(1),' ',hexCode.charAt(2),hexCode.charAt(3)};
         hexCode = String.valueOf(codeChars);
-		logger.info("rtuCode:" + rtuCode + ",hexCode:" + hexCode);
+		logger.debug("rtuCode:" + rtuCode + ",hexCode:" + hexCode);
 		String AStr = waterCode +" "+hexCode;
-		logger.info("地址域A:" + AStr);
+		logger.debug("地址域A:" + AStr);
 		return AStr;
 	}
 

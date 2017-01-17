@@ -3,6 +3,7 @@ package com.baosight.iwater.bigdata.simulation.environment;
 import com.baosight.iwater.bigdata.simulation.IEnvironment;
 
 public class Sky  implements IEnvironment{
+	private int count = 1;
 	private String name;
 	private double yuliang;
 
@@ -29,6 +30,7 @@ public class Sky  implements IEnvironment{
 
 	@Override
 	public double getStatus() {
+		this.yuliang = count++;
 		// TODO Auto-generated method stub
 		return this.yuliang;
 	}

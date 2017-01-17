@@ -36,7 +36,7 @@ public class SocketSender {
 			InetAddress addr = InetAddress.getByName(this.getHost());
 			socket = new Socket(addr, this.getPort());
 
-			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			//in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			out = new DataOutputStream(socket.getOutputStream());
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
@@ -49,6 +49,12 @@ public class SocketSender {
 
 	public void send(WaterMessage message) throws Exception {
 		try {
+			boolean isConnected = socket.isConnected() && !socket.isClosed();
+			if(!isConnected){
+				InetAddress addr = InetAddress.getByName(this.getHost());
+				socket = new Socket(addr, this.getPort());
+				out = new DataOutputStream(socket.getOutputStream());
+			}
 			//此处要将hex字符串转为byte发送到Server，和CRC校验那里一样，转换每个字节，不能直接使用字符串
 			String messageData = message.getMessage();
 			byte[] bytes = hex2byte(messageData);
@@ -56,7 +62,7 @@ public class SocketSender {
 			out.write(bytes);
 			// 刷新输出流，使Server马上收到该字符串
 			out.flush();
-			logger.info("SocketSender发送数据:" + messageData + ",host:" + this.getHost() + ",port:" + this.getPort());
+			logger.debug("SocketSender发送数据:" + messageData + ",host:" + this.getHost() + ",port:" + this.getPort());
 			// String rcvData = in.readLine();
 			// System.out.println("Server:" + rcvData);
 

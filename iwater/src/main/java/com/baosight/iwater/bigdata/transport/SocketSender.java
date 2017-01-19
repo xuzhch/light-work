@@ -31,8 +31,9 @@ public class SocketSender {
 	}
 	
 	private void init(){
-		logger.info("SocketSender开始连接服务端！host:" + this.getHost() + ",port:" + this.getPort());
+		
 		try {
+			logger.info("SocketSender开始连接服务端！host:" + this.getHost() + ",port:" + this.getPort());
 			InetAddress addr = InetAddress.getByName(this.getHost());
 			socket = new Socket(addr, this.getPort());
 
@@ -49,8 +50,9 @@ public class SocketSender {
 
 	public void send(WaterMessage message) throws Exception {
 		try {
-			boolean isConnected = socket.isConnected() && !socket.isClosed();
+			boolean isConnected = socket!=null && socket.isConnected() && !socket.isClosed();
 			if(!isConnected){
+				logger.info("SocketSender开始连接服务端！host:" + this.getHost() + ",port:" + this.getPort());
 				InetAddress addr = InetAddress.getByName(this.getHost());
 				socket = new Socket(addr, this.getPort());
 				out = new DataOutputStream(socket.getOutputStream());

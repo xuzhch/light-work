@@ -43,7 +43,7 @@ public class YuliangData extends AbstractSelfReportData {
 		String byte2 = StringUtils.getPosHexString(str,2,1)+ StringUtils.getPosHexString(str,3,1);
 		String byte3 = StringUtils.getPosHexString(str,0,1)+ StringUtils.getPosHexString(str,1,1);	
 		String data = byte1+" "+byte2+" "+byte3;
-		logger.debug("雨量数值："+value+",报文值："+data);
+		logger.info("雨量数值："+value+",报文值："+data);
 		return this.getAFNCode()+" "+data;
 	}
 	

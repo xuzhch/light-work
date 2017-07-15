@@ -79,9 +79,9 @@ public class JiliangMessage implements IMessage {
 			sb.append("</columns>");
 			sb.append("</tp>");
 			sb.append("</data>");
-			String userData = sb.toString();
+			String energyData = sb.toString();
 			
-			JiliangMessage msg = new JiliangMessage(rtuCode,secretKey,userData);
+			JiliangMessage msg = new JiliangMessage(rtuCode,secretKey,energyData);
 			System.out.println("能耗数据包为：" + msg.getMessage());
 			SocketSender sender = new SocketSender(host, port);
 			sender.send(msg);

@@ -11,9 +11,6 @@ import org.apache.log4j.Logger;
 
 import com.baosight.iwater.bigdata.IMessage;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
-
 public class SocketSender {
 	private static Logger logger = Logger.getLogger(SocketSender.class);
 
@@ -62,7 +59,7 @@ public class SocketSender {
 			//此处要将hex字符串转为byte发送到Server，和CRC校验那里一样，转换每个字节，不能直接使用字符串
 			String messageData = message.getMessage();
 			//messageData = "1";
-			out.write(new BASE64Decoder().decodeBuffer(messageData));
+			out.write(hex2byte(messageData));
 			// 刷新输出流，使Server马上收到该字符串
 			out.flush();
 			logger.debug("SocketSender发送数据:" + messageData + ",host:" + this.getHost() + ",port:" + this.getPort());

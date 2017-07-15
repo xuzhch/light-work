@@ -5,52 +5,57 @@ import org.apache.log4j.Logger;
 import com.baosight.iwater.bigdata.AesEncodeUtil;
 import com.baosight.iwater.bigdata.CHexConverter;
 import com.baosight.iwater.bigdata.IMessage;
-import com.baosight.iwater.bigdata.IUserData;
 import com.baosight.iwater.bigdata.StringUtils;
-import com.baosight.iwater.bigdata.userdata.JiliangData;
-import com.baosight.iwater.bigdata.userdata.YuliangData;
-
-import sun.misc.BASE64Encoder;
+import com.baosight.iwater.bigdata.transport.SocketSender;
 
 public class JiliangMessage implements IMessage {
 	private static Logger logger = Logger.getLogger(JiliangMessage.class);
 
-	private String userData; // 用户数据
+	private String energyData; // 未加密的能耗数据，XML格式的消息，UTF-8编码
 
-	private String rtuCode;
+	private String rtuCode; //采集设备编码
 	
-	private static final String PASSWORD = "C509A6F7";
+	private String secretKey; //数据传输密钥
+	
+	private static final String HEAD = "1F1F"; //传输消息头，2个字节，固定为0x1F1F
 
-	public JiliangMessage(String rtuCode, String userData) {
+	public JiliangMessage(String rtuCode, String secretKey,String energyData) {
 		super();
 		this.rtuCode = rtuCode;
-		this.userData = userData;
+		this.secretKey = secretKey;
+		this.energyData = energyData;
 	}
 
 	@Override
 	public String getMessage() throws Exception {
-		String head = "1F 1F"; // 头部
-		String rtuCode = "00 01 A0 1C 01";// 设备编码
+		// 处理能耗数据，得到能耗数据UTF-8编码xml字符串的hex传输字符串
+		// 能耗数据转换为UTF8编码
+		String dataString = new String(this.getEnergyData().getBytes("UTF-8"), "UTF-8");
 		
-		//处理能耗数据，得到能耗数据UTF-8编码xml字符串的hex传输字符串
-		String dataString = new String(this.getUserData().getBytes("UTF-8"), "UTF-8");// 能耗数据转换为UTF8编码
-		byte[] dataBytes = AesEncodeUtil.encrypt(dataString,PASSWORD);// 经过AES加密后的能耗数据
-		String dataHexStr = CHexConverter.byte2HexStr(dataBytes, dataBytes.length);// 转换为Hex字符串，通过TCP协议传输
+		// 经过AES加密后的能耗数据
+		byte[] dataBytes = AesEncodeUtil.encrypt(dataString, this.getSecretKey());
 		
-		//获得能耗数据包长度的hex字符串
+		// 转换为Hex字符串，通过TCP协议传输
+		String dataHexStr = CHexConverter.byte2HexStr(dataBytes, dataBytes.length);
+
+		// 获得能耗数据包长度的hex字符串
 		String lengthHexStr = StringUtils.getFixLengthString(Integer.toHexString(dataHexStr.split("[ ]").length), 4);
 
-		String messageHexStr = StringUtils.formatHexStr(head + rtuCode + lengthHexStr + dataHexStr);
+		// 组成能耗数据传输数据包
+		String messageHexStr = StringUtils.formatHexStr(HEAD + rtuCode + lengthHexStr + dataHexStr);
 		logger.debug("能耗数据传输数据包为:" + messageHexStr);
 
 		return messageHexStr;
 	}
 
-
 	public static void main(String args[]) {
 		try {
-			String rtu = "B12";
-			System.out.println(CHexConverter.str2HexStr(rtu));
+			String rtuCode = "0001A01C01"; //采集设备编码
+			String secretKey = "C509A6F7"; //数据传输密钥
+			String host = "127.0.0.1"; //采集服务器IP地址
+			int port = 80; //采集服务器端口号
+
+			//测试能耗原始数据
 			StringBuffer sb = new StringBuffer();
 			sb.append("<?XML version=\"1.0\" encoding=\"utf-8\"?>");
 			sb.append("<state>resent</state>");
@@ -75,21 +80,31 @@ public class JiliangMessage implements IMessage {
 			sb.append("</tp>");
 			sb.append("</data>");
 			String userData = sb.toString();
-			String msg = new JiliangMessage("100", userData).getMessage();
-			System.out.println("能耗数据包为："+msg);
-			// new WaterMessage("B2", new ShuiweiData(-20.2)).getMessage();
+			
+			JiliangMessage msg = new JiliangMessage(rtuCode,secretKey,userData);
+			System.out.println("能耗数据包为：" + msg.getMessage());
+			SocketSender sender = new SocketSender(host, port);
+			sender.send(msg);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public String getUserData() {
-		return userData;
+	public String getEnergyData() {
+		return energyData;
 	}
 
-	public void setUserData(String userData) {
-		this.userData = userData;
+	public void setEnergyData(String energyData) {
+		this.energyData = energyData;
+	}
+
+	public String getSecretKey() {
+		return secretKey;
+	}
+
+	public void setSecretKey(String secretKey) {
+		this.secretKey = secretKey;
 	}
 
 }

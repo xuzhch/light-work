@@ -2,8 +2,9 @@ package com.baosight.iwater.bigdata.simulation.rtu;
 
 import java.util.List;
 
+import com.baosight.iwater.bigdata.IMessage;
 import com.baosight.iwater.bigdata.IUserData;
-import com.baosight.iwater.bigdata.WaterMessage;
+import com.baosight.iwater.bigdata.message.WaterMessage;
 import com.baosight.iwater.bigdata.transport.SocketSender;
 
 public class SimpleRTU extends AbstractRTU{
@@ -25,7 +26,7 @@ public class SimpleRTU extends AbstractRTU{
 		SocketSender sender = new SocketSender(this.getHost(),this.getPort());
 		List<IUserData> userDatas = this.collectData();
 		for(IUserData userData:userDatas){
-			WaterMessage message = new WaterMessage(this.getRTUCode(),userData);
+			IMessage message = new WaterMessage(this.getRTUCode(),userData);
 			sender.send(message);
 		}		
 	}

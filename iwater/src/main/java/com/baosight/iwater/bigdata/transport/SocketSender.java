@@ -3,14 +3,16 @@ package com.baosight.iwater.bigdata.transport;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
 import org.apache.log4j.Logger;
 
-import com.baosight.iwater.bigdata.WaterMessage;
+import com.baosight.iwater.bigdata.IMessage;
+
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
 public class SocketSender {
 	private static Logger logger = Logger.getLogger(SocketSender.class);
@@ -48,7 +50,7 @@ public class SocketSender {
 		}
 	}
 
-	public void send(WaterMessage message) throws Exception {
+	public void send(IMessage message) throws Exception {
 		try {
 			boolean isConnected = socket!=null && socket.isConnected() && !socket.isClosed();
 			if(!isConnected){
@@ -59,9 +61,8 @@ public class SocketSender {
 			}
 			//此处要将hex字符串转为byte发送到Server，和CRC校验那里一样，转换每个字节，不能直接使用字符串
 			String messageData = message.getMessage();
-			byte[] bytes = hex2byte(messageData);
 			//messageData = "1";
-			out.write(bytes);
+			out.write(new BASE64Decoder().decodeBuffer(messageData));
 			// 刷新输出流，使Server马上收到该字符串
 			out.flush();
 			logger.debug("SocketSender发送数据:" + messageData + ",host:" + this.getHost() + ",port:" + this.getPort());

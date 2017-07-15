@@ -1,11 +1,16 @@
-package com.baosight.iwater.bigdata;
+package com.baosight.iwater.bigdata.message;
 
 import org.apache.log4j.Logger;
 
-import com.baosight.iwater.bigdata.userdata.ShuiweiData;
+import com.baosight.iwater.bigdata.CHexConverter;
+import com.baosight.iwater.bigdata.IMessage;
+import com.baosight.iwater.bigdata.IUserData;
+import com.baosight.iwater.bigdata.StringUtils;
 import com.baosight.iwater.bigdata.userdata.YuliangData;
 
-public class WaterMessage {
+import sun.misc.BASE64Encoder;
+
+public class WaterMessage implements IMessage{
 	private static Logger logger = Logger.getLogger(WaterMessage.class);
 
 	private static String START_STR = "68";

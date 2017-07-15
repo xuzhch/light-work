@@ -5,8 +5,9 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.baosight.iwater.bigdata.IMessage;
 import com.baosight.iwater.bigdata.IUserData;
-import com.baosight.iwater.bigdata.WaterMessage;
+import com.baosight.iwater.bigdata.message.WaterMessage;
 import com.baosight.iwater.bigdata.simulation.RTU;
 import com.baosight.iwater.bigdata.simulation.environment.River;
 import com.baosight.iwater.bigdata.simulation.environment.Sky;
@@ -55,7 +56,7 @@ public class TimingRTU extends AbstractRTU {
 					try {
 						List<IUserData> userDatas = collectData();
 						for (IUserData userData : userDatas) {
-							WaterMessage message = new WaterMessage(rtuCode, userData);
+							IMessage message = new WaterMessage(rtuCode, userData);
 							sender.send(message);
 						}
 						count++;

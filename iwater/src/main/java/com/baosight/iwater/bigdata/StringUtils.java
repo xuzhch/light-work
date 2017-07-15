@@ -19,6 +19,21 @@ public class StringUtils {
 		return outStr;
 	}
 	
+	public static String formatHexStr(String hexStr){
+		String inStr = hexStr.replace(" ", "");
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < inStr.length(); i++){  
+			if(i!=0&&i%2==0){
+				sb.append(" ");
+				sb.append(inStr.charAt(i));
+			}else{
+				sb.append(inStr.charAt(i));
+			}
+		}		
+		return sb.toString();
+	}
+	
+	
 	public static String getPosHexString(String inStr,int pos, int fixLength) throws Exception{
 		int c = Integer.parseInt(String.valueOf(inStr.charAt(pos)));
 		String bc = Integer.toHexString(c);

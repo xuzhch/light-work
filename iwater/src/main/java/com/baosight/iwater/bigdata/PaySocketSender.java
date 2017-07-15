@@ -5,6 +5,7 @@ import java.io.*;
 import java.net.*;
 import java.util.Random;
 
+import com.baosight.iwater.bigdata.message.WaterMessage;
 import com.baosight.iwater.bigdata.userdata.YuliangData;
 
 public class PaySocketSender {
